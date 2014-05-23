@@ -9,6 +9,8 @@ Below is code sample (see test project code).
 
 ### Extract from Table
 
+C#
+
 ```csharp
 SAPConnector connector = new SAPConnector(TestDestination);
 
@@ -37,6 +39,8 @@ try {
 	Console.WriteLine(ex.Message);
 }
 ```
+
+VB.Net
 
 ```vbnet
 Dim connector As New SAPConnector(TestDestination)
@@ -67,6 +71,7 @@ End Try
 
 ### Extract from SAP Query
 
+C#
 
 ```csharp
 SAPConnector connector = new SAPConnector(TestDestination);
@@ -90,6 +95,8 @@ try {
 	Console.WriteLine(ex.Message);
 }
 ```
+
+VB.Net
 
 ```vbnet
 Dim connector As New SAPConnector(TestDestination)
