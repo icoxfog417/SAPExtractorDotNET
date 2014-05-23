@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SAPExtractorDotNET", "SAPExtractorDotNET\SAPExtractorDotNET.vbproj", "{40DAB722-D636-44C3-806E-2D9FD2515206}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SAPExtractorDotNETTest", "SAPExtractorDotNETTest\SAPExtractorDotNETTest.vbproj", "{A870E26D-1A0A-4759-A1E6-77866B448D50}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40DAB722-D636-44C3-806E-2D9FD2515206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40DAB722-D636-44C3-806E-2D9FD2515206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40DAB722-D636-44C3-806E-2D9FD2515206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40DAB722-D636-44C3-806E-2D9FD2515206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A870E26D-1A0A-4759-A1E6-77866B448D50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A870E26D-1A0A-4759-A1E6-77866B448D50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A870E26D-1A0A-4759-A1E6-77866B448D50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A870E26D-1A0A-4759-A1E6-77866B448D50}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
