@@ -49,14 +49,17 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="rscp4n">
-      <HintPath>..\SAPExtractorDotNET\SAPNco(x86)\rscp4n.dll</HintPath>
+    <Reference Include="rscp4n, Version=1.0.4329.10159, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SAPExtractorDotNET\lib\rscp4n.dll</HintPath>
     </Reference>
-    <Reference Include="sapnco">
-      <HintPath>..\SAPExtractorDotNET\SAPNco(x86)\sapnco.dll</HintPath>
+    <Reference Include="sapnco, Version=3.0.0.42, Culture=neutral, PublicKeyToken=50436dca5c7f7d23, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SAPExtractorDotNET\lib\sapnco.dll</HintPath>
     </Reference>
-    <Reference Include="sapnco_utils">
-      <HintPath>..\SAPExtractorDotNET\SAPNco(x86)\sapnco_utils.dll</HintPath>
+    <Reference Include="sapnco_utils, Version=3.0.0.42, Culture=neutral, PublicKeyToken=50436dca5c7f7d23, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SAPExtractorDotNET\lib\sapnco_utils.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

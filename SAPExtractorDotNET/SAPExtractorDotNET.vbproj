@@ -115,9 +115,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SAPNco%28x86%29\rscp4n.dll" />
-    <Content Include="SAPNco%28x86%29\sapnco.dll" />
-    <Content Include="SAPNco%28x86%29\sapnco_utils.dll" />
+    <Resource Include="lib\libicudecnumber.dll" />
+    <Resource Include="lib\rscp4n.dll" />
+    <Resource Include="lib\sapnco.dll" />
+    <Resource Include="lib\sapnco_utils.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
