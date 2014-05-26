@@ -20,7 +20,7 @@
     <HtmlHelpName>SAPExtractorDotNETAPI</HtmlHelpName>
     <Language>en-US</Language>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
-    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
     <IndentHtml>False</IndentHtml>
     <KeepLogFile>True</KeepLogFile>
     <DisableCodeBlockComponent>False</DisableCodeBlockComponent>
@@ -28,7 +28,8 @@
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\SAPExtractorDotNET\bin\Debug\SAPExtractorDotNET.dll" xmlns="" />
-<DocumentationSource sourceFile="..\SAPExtractorDotNET\bin\Debug\SAPExtractorDotNET.xml" xmlns="" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\SAPExtractorDotNET\bin\Debug\SAPExtractorDotNET.xml" xmlns="" />
+    </DocumentationSources>
     <SyntaxFilters>Standard</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>False</RootNamespaceContainer>
