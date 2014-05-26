@@ -3,6 +3,7 @@ Imports Microsoft.VisualStudio.TestTools.UnitTesting
 Imports SAP.Middleware.Connector
 Imports SAPExtractorDotNET
 Imports System.Configuration
+Imports SAPExtractorDotNETTest.Util
 
 
 <TestClass()>
@@ -34,9 +35,7 @@ Public Class QueryExtraction
             Dim query As New SAPQueryExtractor(TestQuery, TestUserGroup)
             Dim queryParams As List(Of SAPFieldItem) = query.GetSelectFields(connection)
 
-            For Each param As SAPFieldItem In queryParams
-                Console.WriteLine(param.FieldId + ":" + param.FieldText)
-            Next
+            ResultWriter.Write(queryParams)
 
         Catch ex As Exception
             Console.WriteLine(ex.Message)
@@ -58,16 +57,7 @@ Public Class QueryExtraction
             param.Likes("*")
 
             Dim table As DataTable = query.Invoke(connection, New List(Of SAPFieldItem) From {param})
-
-            Dim columns = (From col As DataColumn In table.Columns).ToList
-            Dim count As Integer = 0
-            For Each row As DataRow In table.Rows
-                Dim line As String = ""
-                columns.ForEach(Sub(c) line += c.ColumnName + ":" + row(c.ColumnName) + " ")
-                Console.WriteLine(Trim(line))
-                If count > 10 Then Exit For
-                count += 1
-            Next
+            ResultWriter.Write(table)
 
         Catch ex As Exception
             Console.WriteLine(ex.Message)

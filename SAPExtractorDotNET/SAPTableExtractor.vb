@@ -33,6 +33,12 @@ Namespace SAPExtractorDotNET
             Me._tableName = tableName
         End Sub
 
+        ''' <summary>
+        ''' Get table's columns definition. 
+        ''' </summary>
+        ''' <param name="destination"></param>
+        ''' <returns></returns>
+        ''' <remarks>Column definitions are taken from DD03M</remarks>
         Public Function GetColumnFields(ByVal destination As RfcDestination) As List(Of SAPFieldItem)
 
             Dim conditions As New List(Of SAPFieldItem)
@@ -63,12 +69,29 @@ Namespace SAPExtractorDotNET
 
         End Function
 
+        ''' <summary>
+        ''' Get SAP Table data.<br/>
+        ''' If condition is Nothing, then get all columns of table.
+        ''' </summary>
+        ''' <param name="destination"></param>
+        ''' <param name="conditions"></param>
+        ''' <param name="fields"></param>
+        ''' <param name="orders">usual order by string(MANDT , BUKRS DESC ... etc.)</param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Public Function Invoke(ByVal destination As RfcDestination, ByVal conditions As List(Of SAPFieldItem), ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As DataTable
 
             Dim result As New DataTable
             Dim rows As List(Of Dictionary(Of String, String)) = Nothing
+            Dim localConditions As List(Of SAPFieldItem) = conditions
 
-            If conditions.Count > MaxStatementCount Then
+            If conditions Is Nothing Then
+                'get all columns
+                localConditions = GetColumnFields(destination)
+            End If
+
+            'RFC has byte-length restriction of row. So if there are too many columns, splite it and merge result after.
+            If localConditions.Count > MaxStatementCount Then
 
                 Dim columnDefines As List(Of SAPFieldItem) = GetColumnFields(destination)
                 Dim keys As List(Of SAPFieldItem) = columnDefines.Where(Function(c) c.isKey).ToList
@@ -79,14 +102,15 @@ Namespace SAPExtractorDotNET
                                   Return String.Join("__", localKeies)
                               End Function
 
+                'split columns and merge it by primary after.
                 Dim splitedCondition As New List(Of List(Of SAPFieldItem))
                 Dim size As Integer = MaxStatementCount - keys.Count
-                Dim limit As Integer = Math.Ceiling(conditions.Count / size)
+                Dim limit As Integer = Math.Ceiling(localConditions.Count / size)
 
                 For i As Integer = 0 To limit - 1
                     Dim splited As New List(Of SAPFieldItem)
                     keys.ForEach(Sub(k) splited.Add(k))
-                    splited.AddRange(conditions.Skip(i * size).Take(size).ToList)
+                    splited.AddRange(localConditions.Skip(i * size).Take(size).ToList)
                     splitedCondition.Add(splited)
                 Next
 
@@ -106,6 +130,7 @@ Namespace SAPExtractorDotNET
 
                 Dim merged As New Dictionary(Of String, Dictionary(Of String, String))
 
+                'merge by primary key
                 For Each runed In taskRuns
                     If runed.IsCompleted Then
                         For Each tResult In runed.Result
@@ -123,11 +148,11 @@ Namespace SAPExtractorDotNET
                 rows = merged.Values.ToList
 
             Else
-                rows = Invoke(destination, TableName, conditions, fields, orders)
+                rows = Invoke(destination, TableName, localConditions, fields, orders)
 
             End If
 
-            For Each cond As SAPFieldItem In conditions
+            For Each cond As SAPFieldItem In localConditions
                 Dim column As New DataColumn(cond.FieldId)
                 column.Caption = cond.FieldText
                 result.Columns.Add(column)
@@ -149,10 +174,10 @@ Namespace SAPExtractorDotNET
 
         Private Function Invoke(ByVal destination As RfcDestination, ByVal table As String, ByVal conditions As List(Of SAPFieldItem), ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As List(Of Dictionary(Of String, String))
 
-            If conditions.Count = 0 Then
+            If conditions Is Nothing OrElse conditions.Count = 0 Then
                 Throw New Exception("You have to set more than 1 condition ")
             End If
-            If conditions.Count > MaxStatementCount Or fields.Count > MaxStatementCount Then
+            If conditions.Count > MaxStatementCount Or (fields IsNot Nothing AndAlso fields.Count > MaxStatementCount) Then
                 Throw New Exception("The maximum count of condition / field is " + MaxStatementCount.ToString)
             End If
 
@@ -162,10 +187,13 @@ Namespace SAPExtractorDotNET
                 parameterLog.Add("SELECT_CONDITION" + i.ToString, If(i > 1, ",", "") + conditions(i - 1).FieldId)
                 func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
             Next
-            For i As Integer = 1 To fields.Count
-                parameterLog.Add("WHERE_CLAUSE" + i.ToString, If(i > 1, "AND ", "") + fields(i - 1).makeWhere)
-                func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
-            Next
+
+            If fields IsNot Nothing Then
+                For i As Integer = 1 To fields.Count
+                    parameterLog.Add("WHERE_CLAUSE" + i.ToString, If(i > 1, "AND ", "") + fields(i - 1).makeWhere)
+                    func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
+                Next
+            End If
 
             parameterLog.Add("FROM_TABLE", SAPFieldItem.escape(table))
             func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
@@ -208,6 +236,13 @@ Namespace SAPExtractorDotNET
 
         End Function
 
+        Public Function Invoke(ByVal destination As RfcDestination, Optional ByVal orders As String = "") As DataTable
+            Return Invoke(destination, Nothing, Nothing, orders)
+        End Function
+
+        Public Function Invoke(ByVal destination As RfcDestination, ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As DataTable
+            Return Invoke(destination, Nothing, fields, orders)
+        End Function
 
     End Class
 
