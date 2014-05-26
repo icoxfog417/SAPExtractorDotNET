@@ -39,6 +39,9 @@
     <HelpTitle>SAPExtractorDotNET</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <ProjectSummary>SAP Query/Table Extractor</ProjectSummary>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="SAPExtractorDotNET" isDocumented="True" xmlns="">SAP Query/Table Extractor</NamespaceSummaryItem>
+    </NamespaceSummaries>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in
        order for Visual Studio to perform the build.  The others are optional
