@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="1.9.7.0" projectFile="D:\project\SAPExtractorDotNET\documents\SAPExtractorDotNETAPI.shfbproj" started="2014/05/26 11:19:54">
+<shfbBuild product="Sandcastle Help File Builder" version="1.9.7.0" projectFile="D:\project\SAPExtractorDotNET\documents\SAPExtractorDotNETAPI.shfbproj" started="2014/05/26 11:23:56">
 <buildStep step="Initializing">
 Finding tools...
 Found Sandcastle tools in &#39;D:\Applications\Sandcastle\&#39;
@@ -17,11 +17,11 @@ Copying XML comments files
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, 英語 (米国))...
-    Last step completed in 00:00:00.0280
+    Last step completed in 00:00:00.0160
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.0040
+    Last step completed in 00:00:00.0010
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
@@ -35,18 +35,18 @@ Generating reflection information...
   Copyright c 2006-2013, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Applying XSL transformation &#39;D:\Applications\Sandcastle\ProductionTransforms\MergeDuplicates.xsl&#39;.
-    Last step completed in 00:00:00.7510
+    Last step completed in 00:00:00.7571
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.0030
+    Last step completed in 00:00:00.0010
 </buildStep>
 <buildStep step="ApplyVisibilityProperties">
 Applying visibility properties to reflection information file
     0 attribute nodes removed
     0 explicit interface implementations removed
     0 local and base class EII elements removed
-    Last step completed in 00:00:00.0320
+    Last step completed in 00:00:00.0280
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
@@ -60,12 +60,12 @@ Transforming reflection output...
   Copyright c 2006-2013, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Applying XSL transformation &#39;D:\Applications\Sandcastle\ProductionTransforms\ReflectionToManifest.xsl&#39;.
-    Last step completed in 00:00:00.6610
+    Last step completed in 00:00:00.7131
 </buildStep>
 <buildStep step="ModifyHelpTopicFilenames">
 Modifying help topic filenames in reflection information file
     No changes required
-    Last step completed in 00:00:00.0220
+    Last step completed in 00:00:00.0230
 </buildStep>
 <buildStep step="CopyStandardContent">
 Copying standard help content...
@@ -457,16 +457,16 @@ D:\Applications\Sandcastle\\Presentation\VS2010\branding -&gt; D:\project\SAPExt
     D:\Applications\Sandcastle\Presentation\VS2010\branding\ps-instrumentedLink.xslt -> D:\project\SAPExtractorDotNET\documents\Help\Working\branding\ps-instrumentedLink.xslt
     D:\Applications\Sandcastle\Presentation\VS2010\branding\ps-languageSpecificText.xslt -> D:\project\SAPExtractorDotNET\documents\Help\Working\branding\ps-languageSpecificText.xslt
     D:\Applications\Sandcastle\Presentation\VS2010\branding\ps-codesnippet.xslt -> D:\project\SAPExtractorDotNET\documents\Help\Working\branding\ps-codesnippet.xslt
-    Last step completed in 00:00:01.1610
+    Last step completed in 00:00:01.3261
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0060
+    Last step completed in 00:00:00.0080
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0040
+    Last step completed in 00:00:00.0020
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
@@ -476,17 +476,17 @@ Generating intermediate table of contents file...
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Applying XSL transformation &#39;D:\Applications\Sandcastle\\ProductionTransforms\CreateVSToc.xsl&#39;.
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.2880
+    Last step completed in 00:00:00.3130
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00.0680
+    Last step completed in 00:00:00.0690
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 D:\project\SAPExtractorDotNET\documents\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.0490
+    Last step completed in 00:00:00.0450
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
@@ -496,7 +496,6 @@ Building reference help topics...
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Loading configuration...
   Info: Processing topics...
-  Warn: ShowMissingComponent: [N:SAPExtractorDotNET] Missing &lt;summary&gt; documentation
   Warn: ResolveReferenceLinksComponent2: [T:SAPExtractorDotNET.SAPConnector] MSDN URL not found for target &#39;T:System.Object&#39;.
   Warn: ResolveReferenceLinksComponent2: [T:SAPExtractorDotNET.SAPConnector] MSDN URL not found for target &#39;T:System.Object&#39;.
   Warn: ResolveReferenceLinksComponent2: [AllMembers.T:SAPExtractorDotNET.SAPConnector] MSDN URL not found for target &#39;M:System.Object.Equals(System.Object)&#39;.
@@ -982,16 +981,16 @@ Building reference help topics...
   Warn: ResolveReferenceLinksComponent2: [P:SAPExtractorDotNET.SAPTableExtractor.TableName] MSDN URL not found for target &#39;T:System.String&#39;.
   Warn: ResolveReferenceLinksComponent2: [P:SAPExtractorDotNET.SAPTableExtractor.TableName] MSDN URL not found for target &#39;T:System.String&#39;.
   Info: Processed 72 topic(s)
-  Info: 485 warning(s)
+  Info: 484 warning(s)
   Diagnostic: CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 4 of 15.
   Diagnostic: CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 2 of 30.
-    Last step completed in 00:00:04.7700
+    Last step completed in 00:00:04.9765
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:00.0060
+    Last step completed in 00:00:00.0050
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -1013,7 +1012,7 @@ Processed 72 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\project\SAPExtractorDotNET\documents\Help\Working\WebKI.xml
 Saving website table of contents to D:\project\SAPExtractorDotNET\documents\Help\Working\WebTOC.xml
-    Last step completed in 00:00:00.4980
+    Last step completed in 00:00:00.7931
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
@@ -1021,11 +1020,11 @@ Generating HTML Help 1 table of contents file...
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
-    Last step completed in 00:00:00.0010
+    Last step completed in 00:00:00.0020
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0080
+    Last step completed in 00:00:00.0100
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -1040,7 +1039,7 @@ Compiling HTML Help 1 file...
   
   
   
-  Compile time: 0 minutes, 1 second
+  Compile time: 0 minutes, 3 seconds
   
   74	Topics
   
@@ -1054,35 +1053,35 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\project\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1\SAPExtractorDotNETAPI.chm, 125,154 bytes
+  Created d:\project\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1\SAPExtractorDotNETAPI.chm, 125,182 bytes
   
-  Compression decreased file by 656,902 bytes.
+  Compression decreased file by 656,763 bytes.
   
-    Last step completed in 00:00:01.8420
+    Last step completed in 00:00:05.1115
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0030
+    Last step completed in 00:00:00.0040
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
-    Last step completed in 00:00:00.4220
+    Last step completed in 00:00:00.2160
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
 
 Copied 100 files
 Copied 167 files for the website content
-    Last step completed in 00:00:00.7250
+    Last step completed in 00:00:00.7091
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00.1650
+    Last step completed in 00:00:00.6661
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 05/26/2014 11:20 午前.  Total time: 00:00:11.6370
+Build completed successfully at 05/26/2014 11:24 午前.  Total time: 00:00:15.8856
 
 </buildStep>
 </shfbBuild>
