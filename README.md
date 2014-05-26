@@ -4,8 +4,12 @@ SAPExtractorDotNET
 This is connector for SAP system.  
 You can extract data from Table or Query.  
 
+[API Documentation](http://icoxfog417.github.io/SAPExtractorDotNET/Index.html)  
+[Install from Nuget](https://www.nuget.org/packages/SAPExtractorDotNET)  
+
 ## How to use
-Below is code sample (see test project code).
+Below is code sample (see test project code).  
+(repository is builded by x86, if your system is x64 then build it by SAPExtractorDotNET/SAPNco(x64))
 
 ### Extract from Table
 
