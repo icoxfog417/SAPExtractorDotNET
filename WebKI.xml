@@ -12,6 +12,10 @@
   <HelpKINode Title="FieldStructure property" Url="html/93ba68b3-9980-654c-d9fd-0b1e15639328.htm" />
   <HelpKINode Title="FieldText property" Url="html/3d47d8ce-8491-dc74-5634-e3d5194f23bf.htm" />
   <HelpKINode Title="FieldType property" Url="html/99850f79-1a2a-cb4f-f80b-694d7e064170.htm" />
+  <HelpKINode Title="Find method">
+    <HelpKINode Title="SAPQueryExtractor.Find Method " Url="html/1c63c88c-11ef-fb05-7c29-525950c9ea8d.htm" />
+    <HelpKINode Title="SAPTableExtractor.Find Method " Url="html/70589837-4b28-ebda-454f-914ecbf9eda1.htm" />
+  </HelpKINode>
   <HelpKINode Title="GetColumnFields method" Url="html/b06561f4-f2a2-5355-382c-0d3c8987f843.htm" />
   <HelpKINode Title="GetSelectFields method" Url="html/3adaf671-3c11-343d-565d-eb27fdbcd3b4.htm" />
   <HelpKINode Title="GreaterEqual method" Url="html/0e58335f-3f15-b6f1-fb7a-0f890cd68348.htm" />
@@ -38,6 +42,7 @@
   <HelpKINode Title="Order property" Url="html/b5d8601b-c3a8-576e-90eb-b3b9f0a1f88b.htm" />
   <HelpKINode Title="Query property" Url="html/e031709b-6eec-bb73-54de-79e02ddf43d9.htm" />
   <HelpKINode Title="QueryArea property" Url="html/c81f9ecf-633a-3a80-5e1f-3447ca4ec015.htm" />
+  <HelpKINode Title="QueryText property" Url="html/9ee2f2ed-5ec3-03db-7412-6715ad5e18fb.htm" />
   <HelpKINode Title="QueryVariant property" Url="html/38e09f71-ee1b-fa73-684e-4be9f3cc70f1.htm" />
   <HelpKINode Title="SAPConnector class">
     <HelpKINode Title="SAPConnector Class" Url="html/f6c90bbd-fba2-8d7c-4f2b-b2ca33199274.htm" />
@@ -118,10 +123,12 @@
     <HelpKINode Title="methods" Url="html/7496f6c0-4a8a-5f6e-ce12-0a55d692ad00.htm" />
     <HelpKINode Title="properties" Url="html/d60befcb-c526-67f0-4b42-c4b421fcf9eb.htm" />
   </HelpKINode>
+  <HelpKINode Title="SAPQueryExtractor.Find method" Url="html/1c63c88c-11ef-fb05-7c29-525950c9ea8d.htm" />
   <HelpKINode Title="SAPQueryExtractor.GetSelectFields method" Url="html/3adaf671-3c11-343d-565d-eb27fdbcd3b4.htm" />
   <HelpKINode Title="SAPQueryExtractor.Invoke method" Url="html/2cc4d5f3-fbcb-2253-b328-08602dbc846d.htm" />
   <HelpKINode Title="SAPQueryExtractor.Query property" Url="html/e031709b-6eec-bb73-54de-79e02ddf43d9.htm" />
   <HelpKINode Title="SAPQueryExtractor.QueryArea property" Url="html/c81f9ecf-633a-3a80-5e1f-3447ca4ec015.htm" />
+  <HelpKINode Title="SAPQueryExtractor.QueryText property" Url="html/9ee2f2ed-5ec3-03db-7412-6715ad5e18fb.htm" />
   <HelpKINode Title="SAPQueryExtractor.QueryVariant property" Url="html/38e09f71-ee1b-fa73-684e-4be9f3cc70f1.htm" />
   <HelpKINode Title="SAPQueryExtractor.SAPQueryExtractor constructor" Url="html/bca8d2ba-de55-45d7-2fa9-8ac054352c81.htm" />
   <HelpKINode Title="SAPQueryExtractor.UserGroup property" Url="html/ed13fb55-bf6c-0bc4-87b9-d2d4b979207e.htm" />
@@ -134,12 +141,15 @@
     <HelpKINode Title="methods" Url="html/cc6ed1bf-5057-83f6-ab18-516df53359d2.htm" />
     <HelpKINode Title="properties" Url="html/28a50d70-77bd-fb97-dad6-71930ce21be3.htm" />
   </HelpKINode>
+  <HelpKINode Title="SAPTableExtractor.Find method" Url="html/70589837-4b28-ebda-454f-914ecbf9eda1.htm" />
   <HelpKINode Title="SAPTableExtractor.GetColumnFields method" Url="html/b06561f4-f2a2-5355-382c-0d3c8987f843.htm" />
   <HelpKINode Title="SAPTableExtractor.Invoke method" Url="html/29cf0e69-ca3e-c76f-85bf-3c292cf3d17e.htm" />
   <HelpKINode Title="SAPTableExtractor.SAPTableExtractor constructor" Url="html/bc9b5cc1-90c2-649f-a3f0-3351672b2445.htm" />
-  <HelpKINode Title="SAPTableExtractor.TableName property" Url="html/c31943a8-2e25-793d-7543-fb1c302203e0.htm" />
+  <HelpKINode Title="SAPTableExtractor.Table property" Url="html/0e315ebc-ea9c-cdc7-c321-40545cae47e7.htm" />
+  <HelpKINode Title="SAPTableExtractor.TableText property" Url="html/8ff03ffb-4369-0a3c-f739-0ca5c5cf48bf.htm" />
   <HelpKINode Title="StartsWith method" Url="html/703b640d-6a0c-2439-5855-8f98722905c9.htm" />
-  <HelpKINode Title="TableName property" Url="html/c31943a8-2e25-793d-7543-fb1c302203e0.htm" />
+  <HelpKINode Title="Table property" Url="html/0e315ebc-ea9c-cdc7-c321-40545cae47e7.htm" />
+  <HelpKINode Title="TableText property" Url="html/8ff03ffb-4369-0a3c-f739-0ca5c5cf48bf.htm" />
   <HelpKINode Title="User property" Url="html/a7b04dc3-a267-53f7-99c2-3c8552d76884.htm" />
   <HelpKINode Title="UserGroup property" Url="html/ed13fb55-bf6c-0bc4-87b9-d2d4b979207e.htm" />
   <HelpKINode Title="Value property" Url="html/07ce0bce-07cf-f5ab-a7a9-406503b7e85b.htm" />
