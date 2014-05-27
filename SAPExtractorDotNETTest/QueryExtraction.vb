@@ -23,6 +23,25 @@ Public Class QueryExtraction
         End Get
     End Property
 
+    <TestMethod()>
+    Public Sub FindQuery()
+        Dim connector As New SAPConnector(TestDestination)
+
+        Try
+            Dim connection As RfcDestination = connector.Login
+            Dim list As List(Of SAPQueryExtractor) = SAPQueryExtractor.Find(connection, "Y*", "Y*")
+
+            For i As Integer = 0 To If(list.Count > 10, 10, list.Count) - 1
+                Dim q = list(i)
+                Console.WriteLine(q.UserGroup + "/" + q.Query + ":" + q.QueryText)
+            Next
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Assert.Fail()
+        End Try
+
+    End Sub
 
     <TestMethod()>
     Public Sub GetQueryParameters()

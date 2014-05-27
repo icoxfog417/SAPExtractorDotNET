@@ -12,6 +12,27 @@ Public Class TableExtraction
     Private Const TestDestination As String = "SILENT_LOGIN"
 
     <TestMethod()>
+    Public Sub FindTable()
+
+        Dim connector As New SAPConnector(TestDestination)
+
+        Try
+            Dim connection As RfcDestination = connector.Login
+            Dim tables As List(Of SAPTableExtractor) = SAPTableExtractor.Find(connection, "DD*")
+
+            For i As Integer = 0 To If(tables.Count > 10, 10, tables.Count) - 1
+                Dim t = tables(i)
+                Console.WriteLine(t.Table + ":" + t.TableText)
+            Next
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Assert.Fail()
+        End Try
+
+    End Sub
+
+    <TestMethod()>
     Public Sub GetColumnDefine()
         Dim connector As New SAPConnector(TestDestination)
 

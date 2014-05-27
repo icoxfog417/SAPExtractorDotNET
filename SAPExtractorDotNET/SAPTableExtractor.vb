@@ -17,21 +17,62 @@ Namespace SAPExtractorDotNET
         'Private Const RFC_TO_GET_TABLE As String = "RFC_READ_TABLE"
         Private Const RFC_TO_GET_TABLE As String = "/SDF/GET_GENERIC_APO_TABLE"
 
+        Private Const TABLE_TABLE As String = "DD02T"
         Private Const COLUMN_DEFINE_TABLE As String = "DD03M"
 
         Private Const MaxStatementCount As Integer = 12
         Private Const BasicEscapes As String = ";'\"
 
-        Private _tableName As String = ""
-        Public ReadOnly Property TableName As String
+        Private _table As String = ""
+        Public ReadOnly Property Table As String
             Get
-                Return _tableName
+                Return _table
             End Get
         End Property
 
+        Public Property TableText As String
+
         Public Sub New(ByVal tableName As String)
-            Me._tableName = tableName
+            Me._table = tableName
         End Sub
+
+        ''' <summary>
+        ''' Find Table
+        ''' </summary>
+        ''' <param name="destination"></param>
+        ''' <param name="tableName"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Shared Function Find(ByVal destination As RfcDestination, Optional ByVal tableName As String = "") As List(Of SAPTableExtractor)
+            Dim result As New List(Of SAPTableExtractor)
+
+            Dim conditions As New List(Of SAPFieldItem)
+            For Each columnName As String In {"TABNAME", "DDTEXT"}
+                conditions.Add(New SAPFieldItem(columnName))
+            Next
+
+            Dim fields As New List(Of SAPFieldItem)
+            fields.Add(New SAPFieldItem("DDLANGUAGE").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
+            fields.Add(New SAPFieldItem("AS4LOCAL").IsEqualTo("A"))
+            If Not String.IsNullOrEmpty(tableName) Then
+                If tableName.Contains("*") Then
+                    fields.Add(New SAPFieldItem("TABNAME").Matches(tableName))
+                Else
+                    fields.Add(New SAPFieldItem("TABNAME").IsEqualTo(tableName))
+                End If
+            End If
+
+            Dim tables As List(Of Dictionary(Of String, String)) = SAPTableExtractor.Invoke(destination, TABLE_TABLE, conditions, fields, "TABNAME")
+
+            For Each table As Dictionary(Of String, String) In tables
+                Dim t As New SAPTableExtractor(table("TABNAME"))
+                t.TableText = table("DDTEXT")
+                result.Add(t)
+            Next
+
+            Return result
+
+        End Function
 
         ''' <summary>
         ''' Get table's columns definition. 
@@ -52,7 +93,7 @@ Namespace SAPExtractorDotNET
             conditions.Add(New SAPFieldItem("KEYFLAG"))
             conditions.Add(New SAPFieldItem("DDTEXT"))
 
-            fields.Add(New SAPFieldItem("TABNAME").IsEqualTo(TableName))
+            fields.Add(New SAPFieldItem("TABNAME").IsEqualTo(Table))
             fields.Add(New SAPFieldItem("FLDSTAT").IsEqualTo("A"))
             fields.Add(New SAPFieldItem("DDLANGUAGE").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
 
@@ -118,7 +159,7 @@ Namespace SAPExtractorDotNET
                 splitedCondition.ForEach(Sub(sc)
                                              tasks.Add(New Task(Of Dictionary(Of String, Dictionary(Of String, String)))(
                                                                 Function()
-                                                                    Dim tResult As List(Of Dictionary(Of String, String)) = Invoke(destination, TableName, sc, fields)
+                                                                    Dim tResult As List(Of Dictionary(Of String, String)) = Invoke(destination, Table, sc, fields)
                                                                     Return tResult.ToDictionary(Of String, Dictionary(Of String, String))(Function(tr) makeKey(tr), Function(tr) tr)
                                                                 End Function
                                                                 ))
@@ -148,7 +189,7 @@ Namespace SAPExtractorDotNET
                 rows = merged.Values.ToList
 
             Else
-                rows = Invoke(destination, TableName, localConditions, fields, orders)
+                rows = Invoke(destination, Table, localConditions, fields, orders)
 
             End If
 
@@ -172,7 +213,7 @@ Namespace SAPExtractorDotNET
 
         End Function
 
-        Private Function Invoke(ByVal destination As RfcDestination, ByVal table As String, ByVal conditions As List(Of SAPFieldItem), ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As List(Of Dictionary(Of String, String))
+        Private Shared Function Invoke(ByVal destination As RfcDestination, ByVal table As String, ByVal conditions As List(Of SAPFieldItem), ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As List(Of Dictionary(Of String, String))
 
             If conditions Is Nothing OrElse conditions.Count = 0 Then
                 Throw New Exception("You have to set more than 1 condition ")
@@ -184,7 +225,7 @@ Namespace SAPExtractorDotNET
             Dim parameterLog As New Dictionary(Of String, String)
             Dim func As IRfcFunction = destination.Repository.CreateFunction(RFC_TO_GET_TABLE)
             For i As Integer = 1 To conditions.Count
-                parameterLog.Add("SELECT_CONDITION" + i.ToString, If(i > 1, ",", "") + conditions(i - 1).FieldId)
+                parameterLog.Add("SELECT_CONDITION" + i.ToString, If(i > 1, ",", "") + SAPFieldItem.escape(conditions(i - 1).FieldId))
                 func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
             Next
 
