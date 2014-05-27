@@ -11,10 +11,12 @@ Namespace SAPExtractorDotNET
     ''' </summary>
     ''' <remarks></remarks>
     Public Class SAPQueryExtractor
+        Private Const RFC_TO_GET_QUERY_CATALOG As String = "RSAQ_REMOTE_QUERY_CATALOG"
         Private Const RFC_TO_GET_QUERY_FIELD As String = "RSAQ_REMOTE_QUERY_FIELDLIST"
         Private Const RFC_TO_EXECUTE_QUERY As String = "RSAQ_REMOTE_QUERY_CALL"
+        Private Const DEFAULT_QUERY_AREA As String = "G"
 
-        Private _queryArea As String = "G"
+        Private _queryArea As String = DEFAULT_QUERY_AREA
         Public ReadOnly Property QueryArea As String
             Get
                 Return _queryArea
@@ -36,6 +38,7 @@ Namespace SAPExtractorDotNET
         End Property
 
         Public Property QueryVariant As String = ""
+        Public Property QueryText As String = ""
 
         Public Sub New(ByVal queryArea As String, ByVal query As String, ByVal userGroup As String)
             _queryArea = queryArea
@@ -47,6 +50,36 @@ Namespace SAPExtractorDotNET
             _query = query
             _userGroup = userGroup
         End Sub
+
+        ''' <summary>
+        ''' Find SAP Query
+        ''' </summary>
+        ''' <param name="destination"></param>
+        ''' <param name="queryName"></param>
+        ''' <param name="userGroup"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
+        Public Shared Function Find(ByVal destination As RfcDestination, Optional ByVal queryName As String = "", Optional ByVal userGroup As String = "") As List(Of SAPQueryExtractor)
+            Dim result As New List(Of SAPQueryExtractor)
+            Dim func As IRfcFunction = destination.Repository.CreateFunction(RFC_TO_GET_QUERY_CATALOG)
+            func.SetValue("WORKSPACE", DEFAULT_QUERY_AREA)
+            func.SetValue("GENERIC_QUERYNAME", If(String.IsNullOrEmpty(queryName), "*", queryName))
+            func.SetValue("GENERIC_USERGROUP", If(String.IsNullOrEmpty(userGroup), "*", userGroup))
+
+            func.Invoke(destination)
+
+            Dim rfcTable As IRfcTable = func.GetTable("QUERYCATALOG")
+
+            For i As Integer = 0 To rfcTable.Count - 1
+                rfcTable.CurrentIndex = i
+                Dim q As New SAPQueryExtractor(rfcTable.GetValue("QUERY"), rfcTable.GetValue("NUM"))
+                q.QueryText = rfcTable.GetValue("QTEXT")
+                result.Add(q)
+            Next
+
+            Return result
+
+        End Function
 
         Public Function GetSelectFields(ByVal destination As RfcDestination) As List(Of SAPFieldItem)
             Dim fields As New List(Of SAPFieldItem)
