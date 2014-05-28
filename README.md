@@ -9,7 +9,8 @@ You can extract data from Table or Query.
 
 ## How to use
 Below is code sample (see test project code).  
-(repository is builded by x86, if your system is x64 then build it by SAPExtractorDotNET/SAPNco(x64))
+(repository is builded by x86, if your system is x64 then build it by SAPExtractorDotNET/SAPNco(x64))  
+**You can use it by command line! see saploader's README**
 
 ### Extract from Table
 
