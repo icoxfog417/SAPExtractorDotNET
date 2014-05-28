@@ -126,7 +126,7 @@ Namespace SAPExtractorDotNET
             Dim rows As List(Of Dictionary(Of String, String)) = Nothing
             Dim localConditions As List(Of SAPFieldItem) = conditions
 
-            If conditions Is Nothing Then
+            If conditions Is Nothing OrElse conditions.Count = 0 Then
                 'get all columns
                 localConditions = GetColumnFields(destination)
             End If
