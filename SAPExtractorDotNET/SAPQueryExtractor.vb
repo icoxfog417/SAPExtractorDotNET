@@ -104,8 +104,32 @@ Namespace SAPExtractorDotNET
 
         End Function
 
+        ''' <summary>
+        ''' Extract data from SAP Query
+        ''' </summary>
+        ''' <param name="destination"></param>
+        ''' <param name="fields"></param>
+        ''' <returns></returns>
+        ''' <remarks></remarks>
         Public Function Invoke(ByVal destination As RfcDestination, Optional ByVal fields As List(Of SAPFieldItem) = Nothing) As DataTable
             Dim result As New DataTable
+            Dim filters As List(Of SAPFieldItem) = fields
+
+            'no-variant and no-filters cause NO_SELECTION exception. so if input parameter exist , set * to it.
+            If fields Is Nothing OrElse fields.Count = 0 Then
+                If String.IsNullOrEmpty(QueryVariant) Then
+                    Dim param As SAPFieldItem = GetSelectFields(destination).Where(Function(p) Not p.isIgnore).FirstOrDefault
+                    If param IsNot Nothing Then
+                        filters = New List(Of SAPFieldItem) From {param.Matches("*")}
+                    End If
+                End If
+            Else
+                For i As Integer = 0 To filters.Count - 1
+                    If String.IsNullOrEmpty(filters(i).FieldId) Then
+                        filters(i).FieldId = "SP$" + (i + 1).ToString.PadLeft(5, "0") 'set default parameter name
+                    End If
+                Next
+            End If
 
             Dim func As IRfcFunction = destination.Repository.CreateFunction(RFC_TO_EXECUTE_QUERY)
             func.SetValue("WORKSPACE", QueryArea)
@@ -114,11 +138,13 @@ Namespace SAPExtractorDotNET
             func.SetValue("DATA_TO_MEMORY", "X")
             func.SetValue("EXTERNAL_PRESENTATION", "Z") 'convert sap currency to external (without comma format)
 
-            If Not String.IsNullOrEmpty(QueryVariant) Then func.SetValue("VARIANT", QueryVariant)
+            If Not String.IsNullOrEmpty(QueryVariant) Then
+                func.SetValue("VARIANT", QueryVariant)
+            End If
 
-            If fields IsNot Nothing Then
+            If filters IsNot Nothing AndAlso filters.Count > 0 Then
                 Dim selections As IRfcTable = func.GetTable("SELECTION_TABLE")
-                For Each field As SAPFieldItem In fields
+                For Each field As SAPFieldItem In filters
                     selections.Append()
                     selections.CurrentIndex = selections.Count - 1
                     selections.SetValue("SELNAME", field.FieldId)
