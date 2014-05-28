@@ -52,6 +52,24 @@ Namespace SAPExtractorDotNET
             Me.IsRangeField = isRangeField
         End Sub
 
+        Public Shared Function createByStatement(ByVal statement As String, Optional ByVal isRangeField As Boolean = False) As SAPFieldItem
+            Dim operands As String() = {"<>", ">=", "<=", "><", ">", "<", "="}
+            Dim f As SAPFieldItem = Nothing
+
+            For Each opr As String In operands
+                If statement.IndexOf(opr) > -1 Then
+                    Dim keyValue As String() = statement.Split(opr)
+                    If keyValue.Count = 2 Then
+                        f = New SAPFieldItem(Trim(keyValue(0)), isRangeField)
+                        f.ComparesBy(opr, Trim(keyValue(1)))
+                    End If
+                End If
+            Next
+
+            Return f
+
+        End Function
+
         Public Shared Function createByQueryStructure(ByVal sapStructure As IRfcTable) As SAPFieldItem
             Dim f As New SAPFieldItem()
             f.FieldId = sapStructure.GetString("SPNAME")
@@ -157,6 +175,33 @@ Namespace SAPExtractorDotNET
             Me.Value = value
             Me.MaxValue = maxValue
             Return Me
+        End Function
+
+        Public Function ComparesBy(ByVal opr As String, value As String) As SAPFieldItem
+            Select Case opr.Trim
+                Case "="
+                    If value.Contains("*") Then
+                        Me.Matches(value)
+                    Else
+                        Me.IsEqualTo(value)
+                    End If
+                Case "<>"
+                    Me.IsNotEqualTo(value)
+                Case ">"
+                    Me.GreaterThan(value)
+                Case "<"
+                    Me.LowerThan(value)
+                Case ">="
+                    Me.GreaterEqual(value)
+                Case "<="
+                    Me.LowerEqual(value)
+                Case "><"
+                    Dim values As String() = value.Split(",")
+                    Me.Between(values(0), values(1))
+            End Select
+
+            Return Me
+
         End Function
 
         Public Function makeWhere() As String

@@ -24,6 +24,16 @@ Public Class QueryExtraction
     End Property
 
     <TestMethod()>
+    Public Sub MakeFieldByStatement()
+
+        Dim f1 As SAPFieldItem = SAPFieldItem.createByStatement("BUKRS = 1000")
+        Assert.AreEqual("BUKRS", f1.FieldId)
+        Assert.AreEqual("EQ", f1.Operand)
+        Assert.AreEqual("1000", f1.Value)
+
+    End Sub
+
+    <TestMethod()>
     Public Sub FindQuery()
         Dim connector As New SAPConnector(TestDestination)
 
@@ -72,9 +82,29 @@ Public Class QueryExtraction
             Dim connection As RfcDestination = connector.Login
 
             Dim query As New SAPQueryExtractor(TestQuery, TestUserGroup)
-            Dim param As SAPFieldItem = query.GetSelectFields(connection).Where(Function(p) Not p.isIgnore).FirstOrDefault
-            param.Likes("*")
+            Dim table As DataTable = query.Invoke(connection)
+            ResultWriter.Write(table)
 
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Assert.Fail()
+        End Try
+
+    End Sub
+
+    <TestMethod()>
+    Public Sub ExtractQueryWithCriteria()
+
+        Dim connector As New SAPConnector(TestDestination)
+
+        Try
+            Dim connection As RfcDestination = connector.Login
+
+            Dim query As New SAPQueryExtractor(TestQuery, TestUserGroup)
+            'Dim param As SAPFieldItem = query.GetSelectFields(connection).Where(Function(p) Not p.isIgnore).FirstOrDefault
+            'param.Matches("C*")
+
+            Dim param As SAPFieldItem = SAPFieldItem.createByStatement("=C*", True)
             Dim table As DataTable = query.Invoke(connection, New List(Of SAPFieldItem) From {param})
             ResultWriter.Write(table)
 
