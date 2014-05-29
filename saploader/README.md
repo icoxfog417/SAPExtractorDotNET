@@ -25,7 +25,7 @@ options
 
 ## Set up
 To start `saploader` quickly,download quickstart/saploader.zip and expand it.  
-
+And adjust `ClientSettings` in `saploader.exe.config` to connect your SAP.
 
 ## Examples
 
