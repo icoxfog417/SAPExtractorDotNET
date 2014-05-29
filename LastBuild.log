@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="1.9.7.0" projectFile="D:\project\SAPExtractorDotNET\documents\SAPExtractorDotNETAPI.shfbproj" started="2014/05/27 14:58:03">
+<shfbBuild product="Sandcastle Help File Builder" version="1.9.7.0" projectFile="D:\project\SAPExtractorDotNET\documents\SAPExtractorDotNETAPI.shfbproj" started="2014/05/29 9:05:48">
 <buildStep step="Initializing">
 Finding tools...
 Found Sandcastle tools in &#39;D:\Applications\Sandcastle\&#39;
@@ -17,7 +17,7 @@ Copying XML comments files
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, 英語 (米国))...
-    Last step completed in 00:00:00.0660
+    Last step completed in 00:00:00.1069
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
@@ -30,12 +30,12 @@ Generating reflection information...
   Copyright c 2006-2013, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Loaded 1 assemblies for reflection and 1 dependency assemblies.
-  Info: Wrote information on 1 namespaces, 4 types, and 55 members
+  Info: Wrote information on 1 namespaces, 4 types, and 57 members
   XslTransform (v2.7.3.0)
   Copyright c 2006-2013, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Applying XSL transformation &#39;D:\Applications\Sandcastle\ProductionTransforms\MergeDuplicates.xsl&#39;.
-    Last step completed in 00:00:01.9530
+    Last step completed in 00:00:01.6920
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
@@ -46,7 +46,7 @@ Applying visibility properties to reflection information file
     0 attribute nodes removed
     0 explicit interface implementations removed
     0 local and base class EII elements removed
-    Last step completed in 00:00:00.0550
+    Last step completed in 00:00:00.0350
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
@@ -60,12 +60,12 @@ Transforming reflection output...
   Copyright c 2006-2013, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Applying XSL transformation &#39;D:\Applications\Sandcastle\ProductionTransforms\ReflectionToManifest.xsl&#39;.
-    Last step completed in 00:00:01.4680
+    Last step completed in 00:00:01.2053
 </buildStep>
 <buildStep step="ModifyHelpTopicFilenames">
 Modifying help topic filenames in reflection information file
     No changes required
-    Last step completed in 00:00:00.0230
+    Last step completed in 00:00:00.0210
 </buildStep>
 <buildStep step="CopyStandardContent">
 Copying standard help content...
@@ -457,7 +457,7 @@ D:\Applications\Sandcastle\\Presentation\VS2010\branding -&gt; D:\project\SAPExt
     D:\Applications\Sandcastle\Presentation\VS2010\branding\ps-instrumentedLink.xslt -> D:\project\SAPExtractorDotNET\documents\Help\Working\branding\ps-instrumentedLink.xslt
     D:\Applications\Sandcastle\Presentation\VS2010\branding\ps-languageSpecificText.xslt -> D:\project\SAPExtractorDotNET\documents\Help\Working\branding\ps-languageSpecificText.xslt
     D:\Applications\Sandcastle\Presentation\VS2010\branding\ps-codesnippet.xslt -> D:\project\SAPExtractorDotNET\documents\Help\Working\branding\ps-codesnippet.xslt
-    Last step completed in 00:00:02.6840
+    Last step completed in 00:00:01.9888
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
@@ -476,17 +476,17 @@ Generating intermediate table of contents file...
   Portions Copyright c 2006-2013, Eric Woodruff, All Rights Reserved.
   Info: Applying XSL transformation &#39;D:\Applications\Sandcastle\\ProductionTransforms\CreateVSToc.xsl&#39;.
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.3620
+    Last step completed in 00:00:00.3488
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00.4790
+    Last step completed in 00:00:00.3008
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 D:\project\SAPExtractorDotNET\documents\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.0860
+    Last step completed in 00:00:00.1519
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
@@ -638,6 +638,14 @@ Building reference help topics...
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.Between(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.Between(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.Between(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] Missing &lt;summary&gt; documentation
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] Missing &lt;returns&gt; documentation
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] Missing &lt;param name=&quot;opr&quot;/&gt; documentation
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] Missing &lt;param name=&quot;value&quot;/&gt; documentation
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.ComparesBy(System.String,System.String)] MSDN URL not found for target &#39;T:System.String&#39;.
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByQueryStructure(SAP.Middleware.Connector.IRfcTable)] Missing &lt;summary&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByQueryStructure(SAP.Middleware.Connector.IRfcTable)] Missing &lt;returns&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByQueryStructure(SAP.Middleware.Connector.IRfcTable)] Missing &lt;param name=&quot;sapStructure&quot;/&gt; documentation
@@ -649,6 +657,14 @@ Building reference help topics...
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByQueryStructure(SAP.Middleware.Connector.IRfcTable)] Unknown reference link target &#39;T:SAP.Middleware.Connector.IRfcTable&#39;.
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByQueryStructure(SAP.Middleware.Connector.IRfcTable)] Unknown reference link target &#39;T:SAP.Middleware.Connector.IRfcTable&#39;.
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByQueryStructure(SAP.Middleware.Connector.IRfcTable)] Unknown reference link target &#39;T:SAP.Middleware.Connector.IRfcTable&#39;.
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] Missing &lt;summary&gt; documentation
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] Missing &lt;returns&gt; documentation
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] Missing &lt;param name=&quot;statement&quot;/&gt; documentation
+  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] Missing &lt;param name=&quot;isRangeField&quot;/&gt; documentation
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] MSDN URL not found for target &#39;T:System.String&#39;.
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] MSDN URL not found for target &#39;T:System.Boolean&#39;.
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] MSDN URL not found for target &#39;T:System.String&#39;.
+  Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPFieldItem.createByStatement(System.String,System.Boolean)] MSDN URL not found for target &#39;T:System.Boolean&#39;.
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByTableStructure(System.Collections.Generic.Dictionary{{System.String,System.String}})] Missing &lt;summary&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByTableStructure(System.Collections.Generic.Dictionary{{System.String,System.String}})] Missing &lt;returns&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPFieldItem.createByTableStructure(System.Collections.Generic.Dictionary{{System.String,System.String}})] Missing &lt;param name=&quot;columns&quot;/&gt; documentation
@@ -847,7 +863,6 @@ Building reference help topics...
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPQueryExtractor.GetSelectFields(SAP.Middleware.Connector.RfcDestination)] Unknown reference link target &#39;T:SAP.Middleware.Connector.RfcDestination&#39;.
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPQueryExtractor.GetSelectFields(SAP.Middleware.Connector.RfcDestination)] Unknown reference link target &#39;T:SAP.Middleware.Connector.RfcDestination&#39;.
   Warn: ResolveReferenceLinksComponent2: [M:SAPExtractorDotNET.SAPQueryExtractor.GetSelectFields(SAP.Middleware.Connector.RfcDestination)] MSDN URL not found for target &#39;T:System.Collections.Generic.List`1&#39;.
-  Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPQueryExtractor.Invoke(SAP.Middleware.Connector.RfcDestination,System.Collections.Generic.List{{SAPExtractorDotNET.SAPFieldItem}})] Missing &lt;summary&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPQueryExtractor.Invoke(SAP.Middleware.Connector.RfcDestination,System.Collections.Generic.List{{SAPExtractorDotNET.SAPFieldItem}})] Missing &lt;returns&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPQueryExtractor.Invoke(SAP.Middleware.Connector.RfcDestination,System.Collections.Generic.List{{SAPExtractorDotNET.SAPFieldItem}})] Missing &lt;param name=&quot;destination&quot;/&gt; documentation
   Warn: ShowMissingComponent: [M:SAPExtractorDotNET.SAPQueryExtractor.Invoke(SAP.Middleware.Connector.RfcDestination,System.Collections.Generic.List{{SAPExtractorDotNET.SAPFieldItem}})] Missing &lt;param name=&quot;fields&quot;/&gt; documentation
@@ -1019,17 +1034,17 @@ Building reference help topics...
   Warn: ShowMissingComponent: [P:SAPExtractorDotNET.SAPTableExtractor.TableText] Missing &lt;summary&gt; documentation
   Warn: ResolveReferenceLinksComponent2: [P:SAPExtractorDotNET.SAPTableExtractor.TableText] MSDN URL not found for target &#39;T:System.String&#39;.
   Warn: ResolveReferenceLinksComponent2: [P:SAPExtractorDotNET.SAPTableExtractor.TableText] MSDN URL not found for target &#39;T:System.String&#39;.
-  Info: Processed 76 topic(s)
-  Info: 523 warning(s)
+  Info: Processed 78 topic(s)
+  Info: 538 warning(s)
   Diagnostic: CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 4 of 15.
   Diagnostic: CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 2 of 30.
-    Last step completed in 00:00:07.4580
+    Last step completed in 00:00:06.3082
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:00.0060
+    Last step completed in 00:00:00.2229
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -1041,21 +1056,21 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
 
 Processing Help 1 files in D:\project\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1
-Processed 76 HTML files
+Processed 78 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to D:\project\SAPExtractorDotNET\documents\Help\Working\SAPExtractorDotNETAPI.hhk
 Saving HTML Help 1 table of contents to D:\project\SAPExtractorDotNET\documents\Help\Working\SAPExtractorDotNETAPI.hhc
 
 Processing website files in D:\project\SAPExtractorDotNET\documents\Help\Working\Output\Website
-Processed 76 HTML files
+Processed 78 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\project\SAPExtractorDotNET\documents\Help\Working\WebKI.xml
 Saving website table of contents to D:\project\SAPExtractorDotNET\documents\Help\Working\WebTOC.xml
-    Last step completed in 00:00:00.7340
+    Last step completed in 00:00:00.6706
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
-    Last step completed in 00:00:00.0040
+    Last step completed in 00:00:00.0030
 </buildStep>
 <buildStep step="GenerateHelpFileIndex">
 Generating HTML Help 1 index file...
@@ -1063,7 +1078,7 @@ Generating HTML Help 1 index file...
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0120
+    Last step completed in 00:00:00.0110
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -1080,9 +1095,9 @@ Compiling HTML Help 1 file...
   
   Compile time: 0 minutes, 1 second
   
-  78	Topics
+  80	Topics
   
-  864	Local links
+  890	Local links
   
   0	Internet links
   
@@ -1092,11 +1107,11 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\project\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1\SAPExtractorDotNETAPI.chm, 131,430 bytes
+  Created d:\project\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1\SAPExtractorDotNETAPI.chm, 133,396 bytes
   
-  Compression decreased file by 697,797 bytes.
+  Compression decreased file by 719,784 bytes.
   
-    Last step completed in 00:00:02.4520
+    Last step completed in 00:00:02.1857
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
@@ -1105,22 +1120,22 @@ Generating website table of contents file...
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
-    Last step completed in 00:00:00.4910
+    Last step completed in 00:00:00.5377
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
 
 Copied 100 files
-Copied 171 files for the website content
-    Last step completed in 00:00:00.9540
+Copied 173 files for the website content
+    Last step completed in 00:00:00.7995
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00.1710
+    Last step completed in 00:00:00.1799
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 05/27/2014 02:58 午後.  Total time: 00:00:19.7620
+Build completed successfully at 05/29/2014 09:06 午前.  Total time: 00:00:17.0268
 
 </buildStep>
 </shfbBuild>

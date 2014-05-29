@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
   <HelpKINode Title="Between method" Url="html/ff79bf4a-2aff-5dea-3d40-1ceba0259850.htm" />
+  <HelpKINode Title="ComparesBy method" Url="html/95f682c3-42ee-a3ff-f8b9-253ee5e568f7.htm" />
   <HelpKINode Title="createByQueryStructure method" Url="html/b1ff2d06-2a9c-f0a9-f72d-3264f314afbe.htm" />
+  <HelpKINode Title="createByStatement method" Url="html/138c7323-2a68-7587-f1ff-399eb3090f0e.htm" />
   <HelpKINode Title="createByTableStructure method" Url="html/d81a916b-b09e-b2cf-d757-cd071b93e4c2.htm" />
   <HelpKINode Title="Destination property" Url="html/654b87fb-f6d9-e2cd-48be-acd5e6ae5716.htm" />
   <HelpKINode Title="EndsWith method" Url="html/545c4e29-3b69-a2c2-e6df-b1d084f9cf04.htm" />
@@ -85,7 +87,9 @@
     <HelpKINode Title="properties" Url="html/25a029a9-6a67-6acc-e06b-f37c73338e08.htm" />
   </HelpKINode>
   <HelpKINode Title="SAPFieldItem.Between method" Url="html/ff79bf4a-2aff-5dea-3d40-1ceba0259850.htm" />
+  <HelpKINode Title="SAPFieldItem.ComparesBy method" Url="html/95f682c3-42ee-a3ff-f8b9-253ee5e568f7.htm" />
   <HelpKINode Title="SAPFieldItem.createByQueryStructure method" Url="html/b1ff2d06-2a9c-f0a9-f72d-3264f314afbe.htm" />
+  <HelpKINode Title="SAPFieldItem.createByStatement method" Url="html/138c7323-2a68-7587-f1ff-399eb3090f0e.htm" />
   <HelpKINode Title="SAPFieldItem.createByTableStructure method" Url="html/d81a916b-b09e-b2cf-d757-cd071b93e4c2.htm" />
   <HelpKINode Title="SAPFieldItem.EndsWith method" Url="html/545c4e29-3b69-a2c2-e6df-b1d084f9cf04.htm" />
   <HelpKINode Title="SAPFieldItem.escape method" Url="html/cfa41425-0508-44a5-bb3a-965acde9897c.htm" />
