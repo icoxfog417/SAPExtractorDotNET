@@ -23,6 +23,10 @@ options
 /hc : write header by caption text
 ```
 
+## Set up
+To start `saploader` quickly,download quickstart/saploader.zip and expand it.  
+
+
 ## Examples
 
 ```
