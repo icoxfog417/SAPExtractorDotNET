@@ -26,19 +26,19 @@ try {
 	SAPTableExtractor tableExtractor = new SAPTableExtractor("T001");
 
 	//Select columns
-	List<SAPFieldItem> conditions = new List<SAPFieldItem>();
+	List<SAPFieldItem> fields = new List<SAPFieldItem>();
 	foreach (string column in {
 		"BUKRS",
 		"BUTXT"
 	}) {
-		conditions.Add(new SAPFieldItem(column));
+		fields.Add(new SAPFieldItem(column));
 	}
 
 	//Set parameters
-	fields.Add(new SAPFieldItem("SPRAS").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper));
+	options.Add(new SAPFieldItem("SPRAS").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper));
 
 	//Execute
-	DataTable table = tableExtractor.Invoke(connection, conditions, fields);
+	DataTable table = tableExtractor.Invoke(connection, fields, options);
 
 } catch (Exception ex) {
 	Console.WriteLine(ex.Message);
@@ -51,27 +51,16 @@ VB.Net
 Dim connector As New SAPConnector(TestDestination)
 
 Try
-    'Login to sap
+    'Login to SAP
     Dim connection As RfcDestination = connector.Login
 
-    Dim tableExtractor As New SAPTableExtractor("T001")
-
-    'Select columns
-    Dim conditions As New List(Of SAPFieldItem)
-    For Each column As String In {"BUKRS", "BUTXT"}
-        conditions.Add(New SAPFieldItem(column))
-    Next
-    
-    'Set parameters
-    fields.Add(New SAPFieldItem("SPRAS").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
-    
-    'Execute
-    Dim table As DataTable = tableExtractor.Invoke(connection, conditions, fields)
+    Dim tableExtractor As New SAPTableExtractor(TestTable)
+    Dim table As DataTable = tableExtractor.Invoke(connection, {"BUKRS", "BUTXT"}, New SAPFieldItem("SPRAS").IsEqualTo("EN"))
+    ResultWriter.Write(table)
 
 Catch ex As Exception
     Console.WriteLine(ex.Message)
 End Try
-
 ```
 
 ### Extract from SAP Query

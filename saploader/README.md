@@ -7,13 +7,13 @@ This is command line application to extract data from SAP system.
 from table
 
 ```
-saploader <destination> <tablename> <filename> [/c <columns>] [/f <filters>] [/o <order>]
+saploader <destination> <tablename> <filename> [/c <columns>] [/f <fields>] [/o <options>]
 ```
 
 from query
 
 ```
-saploader <destination> <queryname/userGroup> <filename> /q [/f <filters>] [/v <query variant>]
+saploader <destination> <queryname/userGroup> <filename> /q [/o <options>] [/v <query variant>]
 ```
 
 options
@@ -30,6 +30,6 @@ And adjust `ClientSettings` in `saploader.exe.config` to connect your SAP.
 ## Examples
 
 ```
-saploader MY_SAP T001 table.txt /c BUKRS,BUTXT /f BUKRS=C* /o BUKRS
+saploader MY_SAP T001 table.txt /t /f BUKRS,BUTXT /o BUKRS=1*
 saploader MY_SAP ZQUERY01/MYGROUP query.txt /q /v MY_VARIANT
 ```
