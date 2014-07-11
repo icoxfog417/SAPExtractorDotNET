@@ -29,7 +29,7 @@ Module MainModule
             Dim connector As New SAPConnector(destination)
 
             'get common options
-            Dim filters As List(Of SAPFieldItem) = makeFilters(args)
+            Dim options As List(Of SAPFieldItem) = makeOptions(args)
             Dim result As DataTable = Nothing
 
             Dim connection As RfcDestination = connector.Login
@@ -39,11 +39,9 @@ Module MainModule
             If isTable Then
                 'extract from table
 
-                Dim conditions As List(Of SAPFieldItem) = makeConditions(args)
-                Dim order As String = GetOptionValue(args, "/O")
-
+                Dim fields As List(Of SAPFieldItem) = makeFields(args)
                 Dim tableLoader As New SAPTableExtractor(target)
-                result = tableLoader.Invoke(connection, conditions, filters, order)
+                result = tableLoader.Invoke(connection, fields, options)
                 Console.WriteLine("Extraction done from " + tableLoader.Table)
 
             Else
@@ -54,7 +52,7 @@ Module MainModule
                     Dim userGroup As String = queryInfos(1)
                     Dim queryLoader As New SAPQueryExtractor(queryName, userGroup)
                     queryLoader.QueryVariant = GetOptionValue(args, "/V")
-                    result = queryLoader.Invoke(connection, filters)
+                    result = queryLoader.Invoke(connection, options)
                     Console.WriteLine("Extraction done from " + queryLoader.Query + "/" + queryLoader.UserGroup)
 
                 Else
@@ -94,39 +92,39 @@ Module MainModule
 
     End Sub
 
-    Private Function makeConditions(ByVal arguments As String()) As List(Of SAPFieldItem)
-        Const ConditionOption As String = "/C"
-        Dim conditions As New List(Of SAPFieldItem)
-        Dim conditionValue As String = GetOptionValue(arguments, ConditionOption)
+    Private Function makeFields(ByVal arguments As String()) As List(Of SAPFieldItem)
+        Const FieldOption As String = "/F"
+        Dim fields As New List(Of SAPFieldItem)
+        Dim parameterForField As String = GetOptionValue(arguments, FieldOption)
 
-        If conditionValue IsNot Nothing Then
-            Dim columns As String() = conditionValue.Split(",")
+        If parameterForField IsNot Nothing Then
+            Dim columns As String() = parameterForField.Split(",")
 
             For Each column As String In columns
-                conditions.Add(New SAPFieldItem(column))
+                fields.Add(New SAPFieldItem(column))
             Next
 
         End If
 
-        Return conditions
+        Return fields
 
     End Function
 
-    Private Function makeFilters(ByVal arguments As String()) As List(Of SAPFieldItem)
-        Const FilterOption As String = "/F"
-        Dim filters As New List(Of SAPFieldItem)
-        Dim filterValue As String = GetOptionValue(arguments, FilterOption)
+    Private Function makeOptions(ByVal arguments As String()) As List(Of SAPFieldItem)
+        Const OptionOption As String = "/O"
+        Dim options As New List(Of SAPFieldItem)
+        Dim parameterForOption As String = GetOptionValue(arguments, OptionOption)
 
-        If filterValue IsNot Nothing Then
-            Dim statements As String() = filterValue.Split(",")
+        If parameterForOption IsNot Nothing Then
+            Dim statements As String() = parameterForOption.Split(",")
             For i As Integer = 0 To statements.Count - 1
                 'greater part of query fields are select-option 
                 Dim f As SAPFieldItem = SAPFieldItem.createByStatement(statements(i), True)
-                filters.Add(f)
+                options.Add(f)
             Next
         End If
 
-        Return filters
+        Return options
 
     End Function
 
@@ -160,14 +158,14 @@ Module MainModule
         Dim usages As New List(Of String)
         usages.Add("saploader v" + Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString)
         usages.Add("usage:")
-        usages.Add("  from table : saploader <destination> <tablename> <filename> [/c <columns>] [/f <filters>] [/o <order>]")
-        usages.Add("  from query : saploader <destination> <queryname/userGroup> <filename> /q [/f <filters>] [/v <query variant>]")
+        usages.Add("  from table : saploader <destination> <tablename> <filename> [/f <fields>] [/o <options>]")
+        usages.Add("  from query : saploader <destination> <queryname/userGroup> <filename> /q [/o <options>] [/v <query variant>]")
         usages.Add("    if you want to set condition or order to query, create query variant in SAP at present.")
         usages.Add("  other options: ")
         usages.Add("    /h  : write header")
         usages.Add("    /hc : write header by caption text")
         usages.Add("examples:")
-        usages.Add("  saploader MY_SAP T001 table.txt /t /c BUKRS,BUTXT /f BUKRS=C* /o BUKRS")
+        usages.Add("  saploader MY_SAP T001 table.txt /t /f BUKRS,BUTXT /o BUKRS=1*")
         usages.Add("  saploader MY_SAP ZQUERY01/MYGROUP query.txt /q /v MY_VARIANT")
         usages.ForEach(Sub(u) Console.WriteLine(u))
 
