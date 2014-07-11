@@ -80,7 +80,7 @@ Public Class TableExtraction
             Dim connection As RfcDestination = connector.Login
 
             Dim tableExtractor As New SAPTableExtractor(TestTable)
-            Dim table As DataTable = tableExtractor.Invoke(connection, {"BUKRS", "BUTXT"})
+            Dim table As DataTable = tableExtractor.Invoke(connection, {"BUKRS", "BUTXT"}, New SAPFieldItem("SPRAS").IsEqualTo("EN"))
             ResultWriter.Write(table)
 
         Catch ex As Exception

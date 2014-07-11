@@ -301,21 +301,21 @@ Namespace SAPExtractorDotNET
         End Function
 
         Public Function Invoke(ByVal destination As RfcDestination) As DataTable
-            Return Invoke(destination, Nothing, Nothing)
+            Return Invoke(destination, {})
         End Function
 
-        Public Function Invoke(ByVal destination As RfcDestination, fields As String()) As DataTable
-            Return Invoke(destination, New List(Of String)(fields))
+        Public Function Invoke(ByVal destination As RfcDestination, fields As String(), ByVal ParamArray options As SAPFieldItem()) As DataTable
+            Return Invoke(destination, New List(Of String)(fields), options)
         End Function
 
-        Public Function Invoke(ByVal destination As RfcDestination, fields As List(Of String)) As DataTable
+        Public Function Invoke(ByVal destination As RfcDestination, fields As List(Of String), ByVal ParamArray options As SAPFieldItem()) As DataTable
             Dim fieldItems As New List(Of SAPFieldItem)
 
             For Each field As String In fields
                 fieldItems.Add(New SAPFieldItem(field))
             Next
 
-            Return Invoke(destination, fieldItems, Nothing)
+            Return Invoke(destination, fieldItems, New List(Of SAPFieldItem)(options))
 
         End Function
 
