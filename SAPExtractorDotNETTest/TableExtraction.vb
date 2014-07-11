@@ -9,6 +9,7 @@ Imports SAPExtractorDotNETTest.Util
 Public Class TableExtraction
 
     Private Const TestTable As String = "T001"
+    Private Const TestTableWide As String = "MARA"
     Private Const TestDestination As String = "SILENT_LOGIN"
 
     <TestMethod()>
@@ -70,6 +71,25 @@ Public Class TableExtraction
 
     End Sub
 
+    <TestMethod()>
+    Public Sub ExtractTableWithFields()
+
+        Dim connector As New SAPConnector(TestDestination)
+
+        Try
+            Dim connection As RfcDestination = connector.Login
+
+            Dim tableExtractor As New SAPTableExtractor(TestTable)
+            Dim table As DataTable = tableExtractor.Invoke(connection, {"BUKRS", "BUTXT"})
+            ResultWriter.Write(table)
+
+        Catch ex As Exception
+            Console.WriteLine(ex.Message)
+            Assert.Fail()
+        End Try
+
+    End Sub
+
 
     <TestMethod()>
     Public Sub ExtractTableWithCriteria()
@@ -79,17 +99,12 @@ Public Class TableExtraction
         Try
             Dim connection As RfcDestination = connector.Login
 
-            Dim tableExtractor As New SAPTableExtractor(TestTable)
-            Dim conditions As New List(Of SAPFieldItem)
-            Dim fields As New List(Of SAPFieldItem)
+            Dim tableExtractor As New SAPTableExtractor(TestTableWide)
+            Dim options As New List(Of SAPFieldItem)
 
-            For Each column As String In {"BUKRS", "BUTXT"}
-                conditions.Add(New SAPFieldItem(column))
-            Next
+            options.Add(New SAPFieldItem("MATNR").StartsWith("A"))
 
-            fields.Add(New SAPFieldItem("SPRAS").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
-
-            Dim table As DataTable = tableExtractor.Invoke(connection, conditions, fields)
+            Dim table As DataTable = tableExtractor.Invoke(connection, Nothing, options)
             ResultWriter.Write(table)
 
         Catch ex As Exception

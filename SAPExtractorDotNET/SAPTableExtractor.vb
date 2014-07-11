@@ -14,13 +14,15 @@ Namespace SAPExtractorDotNET
     Public Class SAPTableExtractor
 
         'RFC_READ_TABLE and BBP_RFC_READ_TABLE has some bug (mainly when extracting data from huge or including number fields table). 
-        'Private Const RFC_TO_GET_TABLE As String = "RFC_READ_TABLE"
-        Private Const RFC_TO_GET_TABLE As String = "/SDF/GET_GENERIC_APO_TABLE"
+        'SAP disabled /SDF/GET_GENERIC_APO_TABLE ...
+        'Private Const RFC_TO_GET_TABLE As String = "/SDF/GET_GENERIC_APO_TABLE"
+
+        Private Const RFC_TO_GET_TABLE As String = "RFC_READ_TABLE"
 
         Private Const TABLE_TABLE As String = "DD02T"
         Private Const COLUMN_DEFINE_TABLE As String = "DD03M"
 
-        Private Const MaxStatementCount As Integer = 12
+        Private Const MaxRowByteLength As Integer = 512
         Private Const BasicEscapes As String = ";'\"
 
         Private _table As String = ""
@@ -46,23 +48,24 @@ Namespace SAPExtractorDotNET
         Public Shared Function Find(ByVal destination As RfcDestination, Optional ByVal tableName As String = "") As List(Of SAPTableExtractor)
             Dim result As New List(Of SAPTableExtractor)
 
-            Dim conditions As New List(Of SAPFieldItem)
+            Dim fields As New List(Of SAPFieldItem)
             For Each columnName As String In {"TABNAME", "DDTEXT"}
-                conditions.Add(New SAPFieldItem(columnName))
+                fields.Add(New SAPFieldItem(columnName))
             Next
 
-            Dim fields As New List(Of SAPFieldItem)
-            fields.Add(New SAPFieldItem("DDLANGUAGE").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
-            fields.Add(New SAPFieldItem("AS4LOCAL").IsEqualTo("A"))
+            Dim options As New List(Of SAPFieldItem)
+            options.Add(New SAPFieldItem("DDLANGUAGE").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
+            options.Add(New SAPFieldItem("AS4LOCAL").IsEqualTo("A"))
             If Not String.IsNullOrEmpty(tableName) Then
                 If tableName.Contains("*") Then
-                    fields.Add(New SAPFieldItem("TABNAME").Matches(tableName))
+                    options.Add(New SAPFieldItem("TABNAME").Matches(tableName))
                 Else
-                    fields.Add(New SAPFieldItem("TABNAME").IsEqualTo(tableName))
+                    options.Add(New SAPFieldItem("TABNAME").IsEqualTo(tableName))
                 End If
             End If
 
-            Dim tables As List(Of Dictionary(Of String, String)) = SAPTableExtractor.Invoke(destination, TABLE_TABLE, conditions, fields, "TABNAME")
+            Dim tables As List(Of Dictionary(Of String, String)) = SAPTableExtractor.Invoke(destination, TABLE_TABLE, fields, options)
+            tables = tables.OrderBy(Function(d) d("TABNAME")).ToList
 
             For Each table As Dictionary(Of String, String) In tables
                 Dim t As New SAPTableExtractor(table("TABNAME"))
@@ -82,23 +85,23 @@ Namespace SAPExtractorDotNET
         ''' <remarks>Column definitions are taken from DD03M</remarks>
         Public Function GetColumnFields(ByVal destination As RfcDestination) As List(Of SAPFieldItem)
 
-            Dim conditions As New List(Of SAPFieldItem)
             Dim fields As New List(Of SAPFieldItem)
+            Dim options As New List(Of SAPFieldItem)
 
-            conditions.Add(New SAPFieldItem("FIELDNAME"))
-            conditions.Add(New SAPFieldItem("ROLLNAME"))
-            conditions.Add(New SAPFieldItem("DATATYPE"))
-            conditions.Add(New SAPFieldItem("LENG"))
-            conditions.Add(New SAPFieldItem("POSITION"))
-            conditions.Add(New SAPFieldItem("KEYFLAG"))
-            conditions.Add(New SAPFieldItem("DDTEXT"))
+            fields.Add(New SAPFieldItem("FIELDNAME"))
+            fields.Add(New SAPFieldItem("ROLLNAME"))
+            fields.Add(New SAPFieldItem("DATATYPE"))
+            fields.Add(New SAPFieldItem("LENG"))
+            fields.Add(New SAPFieldItem("POSITION"))
+            fields.Add(New SAPFieldItem("KEYFLAG"))
+            fields.Add(New SAPFieldItem("DDTEXT"))
 
-            fields.Add(New SAPFieldItem("TABNAME").IsEqualTo(Table))
-            fields.Add(New SAPFieldItem("FLDSTAT").IsEqualTo("A"))
-            fields.Add(New SAPFieldItem("DDLANGUAGE").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
+            options.Add(New SAPFieldItem("TABNAME").IsEqualTo(Table))
+            options.Add(New SAPFieldItem("FLDSTAT").IsEqualTo("A"))
+            options.Add(New SAPFieldItem("DDLANGUAGE").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper))
 
-            Dim columnDefines As List(Of Dictionary(Of String, String)) = Invoke(destination, COLUMN_DEFINE_TABLE, conditions, fields, "POSITION")
-
+            Dim columnDefines As List(Of Dictionary(Of String, String)) = Invoke(destination, COLUMN_DEFINE_TABLE, fields, options)
+            columnDefines = columnDefines.OrderBy(Function(d) d("POSITION")).ToList
 
             Dim result As New List(Of SAPFieldItem)
             For Each cDefine As Dictionary(Of String, String) In columnDefines
@@ -115,28 +118,32 @@ Namespace SAPExtractorDotNET
         ''' If condition is Nothing, then get all columns of table.
         ''' </summary>
         ''' <param name="destination"></param>
-        ''' <param name="conditions"></param>
         ''' <param name="fields"></param>
-        ''' <param name="orders">usual order by string(MANDT , BUKRS DESC ... etc.)</param>
+        ''' <param name="options"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Function Invoke(ByVal destination As RfcDestination, ByVal conditions As List(Of SAPFieldItem), ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As DataTable
+        Public Function Invoke(ByVal destination As RfcDestination, ByVal fields As List(Of SAPFieldItem), ByVal options As List(Of SAPFieldItem)) As DataTable
 
             Dim result As New DataTable
             Dim rows As List(Of Dictionary(Of String, String)) = Nothing
-            Dim localConditions As List(Of SAPFieldItem) = conditions
-
-            If conditions Is Nothing OrElse conditions.Count = 0 Then
+            Dim localFields As List(Of SAPFieldItem) = fields
+            Dim rowByteLength As Integer = 0
+            If fields Is Nothing OrElse fields.Count = 0 Then
                 'get all columns
-                localConditions = GetColumnFields(destination)
+                localFields = GetColumnFields(destination)
+                localFields.ForEach(Sub(f) rowByteLength += f.FieldSize)
             End If
 
             'RFC has byte-length restriction of row. So if there are too many columns, splite it and merge result after.
-            If localConditions.Count > MaxStatementCount Then
+            If rowByteLength > MaxRowByteLength Then
 
                 Dim columnDefines As List(Of SAPFieldItem) = GetColumnFields(destination)
                 Dim keys As List(Of SAPFieldItem) = columnDefines.Where(Function(c) c.isKey).ToList
+                Dim keySize As Integer = 0
                 keys.ForEach(Sub(k) k.isIgnore = True)
+                keys.ForEach(Sub(k) keySize += k.FieldSize)
+
+                'make row's primary key string
                 Dim makeKey = Function(row As Dictionary(Of String, String)) As String
                                   Dim localKeies As New List(Of String)
                                   keys.ForEach(Sub(k) localKeies.Add(row(k.FieldId)))
@@ -144,26 +151,43 @@ Namespace SAPExtractorDotNET
                               End Function
 
                 'split columns and merge it by primary after.
-                Dim splitedCondition As New List(Of List(Of SAPFieldItem))
-                Dim size As Integer = MaxStatementCount - keys.Count
-                Dim limit As Integer = Math.Ceiling(localConditions.Count / size)
+                Dim splitedFields As New List(Of List(Of SAPFieldItem))
+                Dim limit As Integer = MaxRowByteLength - keySize
+                Dim splitedTotal As Integer = 0
+                Dim splited As New List(Of SAPFieldItem)
 
-                For i As Integer = 0 To limit - 1
-                    Dim splited As New List(Of SAPFieldItem)
-                    keys.ForEach(Sub(k) splited.Add(k))
-                    splited.AddRange(localConditions.Skip(i * size).Take(size).ToList)
-                    splitedCondition.Add(splited)
+                For Each columns In columnDefines
+
+                    If splitedTotal + columns.FieldSize > limit Then
+                        Dim fieldSet As New List(Of SAPFieldItem)(keys)
+                        fieldSet.AddRange(splited)
+                        splitedFields.Add(fieldSet)
+                        splited.Clear()
+                        splitedTotal = 0
+                    End If
+
+                    If Not columns.isIgnore Then
+                        splited.Add(columns)
+                        splitedTotal += columns.FieldSize
+                    End If
+
                 Next
 
+                If splited.Count > 0 Then
+                    Dim fieldSet As New List(Of SAPFieldItem)(keys)
+                    fieldSet.AddRange(splited)
+                    splitedFields.Add(fieldSet)
+                End If
+
                 Dim tasks As New List(Of Task(Of Dictionary(Of String, Dictionary(Of String, String))))
-                splitedCondition.ForEach(Sub(sc)
-                                             tasks.Add(New Task(Of Dictionary(Of String, Dictionary(Of String, String)))(
-                                                                Function()
-                                                                    Dim tResult As List(Of Dictionary(Of String, String)) = Invoke(destination, Table, sc, fields)
-                                                                    Return tResult.ToDictionary(Of String, Dictionary(Of String, String))(Function(tr) makeKey(tr), Function(tr) tr)
-                                                                End Function
-                                                                ))
-                                         End Sub)
+                splitedFields.ForEach(Sub(sc)
+                                          tasks.Add(New Task(Of Dictionary(Of String, Dictionary(Of String, String)))(
+                                                             Function()
+                                                                 Dim tResult As List(Of Dictionary(Of String, String)) = Invoke(destination, Table, sc, options)
+                                                                 Return tResult.ToDictionary(Of String, Dictionary(Of String, String))(Function(tr) makeKey(tr), Function(tr) tr)
+                                                             End Function
+                                                             ))
+                                      End Sub)
 
                 Dim taskRuns = tasks.ToArray
                 Array.ForEach(taskRuns, Sub(t) t.Start())
@@ -189,11 +213,11 @@ Namespace SAPExtractorDotNET
                 rows = merged.Values.ToList
 
             Else
-                rows = Invoke(destination, Table, localConditions, fields, orders)
+                rows = Invoke(destination, Table, localFields, options)
 
             End If
 
-            For Each cond As SAPFieldItem In localConditions
+            For Each cond As SAPFieldItem In localFields
                 Dim column As New DataColumn(cond.FieldId)
                 column.Caption = cond.FieldText
                 result.Columns.Add(column)
@@ -213,76 +237,86 @@ Namespace SAPExtractorDotNET
 
         End Function
 
-        Private Shared Function Invoke(ByVal destination As RfcDestination, ByVal table As String, ByVal conditions As List(Of SAPFieldItem), ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As List(Of Dictionary(Of String, String))
+        Private Shared Function Invoke(ByVal destination As RfcDestination, ByVal table As String, ByVal fields As List(Of SAPFieldItem), ByVal options As List(Of SAPFieldItem))
 
-            If conditions Is Nothing OrElse conditions.Count = 0 Then
-                Throw New Exception("You have to set more than 1 condition ")
-            End If
-            If conditions.Count > MaxStatementCount Or (fields IsNot Nothing AndAlso fields.Count > MaxStatementCount) Then
-                Throw New Exception("The maximum count of condition / field is " + MaxStatementCount.ToString)
-            End If
-
-            Dim parameterLog As New Dictionary(Of String, String)
             Dim func As IRfcFunction = destination.Repository.CreateFunction(RFC_TO_GET_TABLE)
-            For i As Integer = 1 To conditions.Count
-                parameterLog.Add("SELECT_CONDITION" + i.ToString, If(i > 1, ",", "") + SAPFieldItem.escape(conditions(i - 1).FieldId))
-                func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
-            Next
 
+            'set fields
             If fields IsNot Nothing Then
-                For i As Integer = 1 To fields.Count
-                    parameterLog.Add("WHERE_CLAUSE" + i.ToString, If(i > 1, "AND ", "") + fields(i - 1).makeWhere)
-                    func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
+                Dim fs As IRfcTable = func.GetTable("FIELDS")
+                For i As Integer = 0 To fields.Count - 1
+                    fs.Append()
+                    fs.CurrentIndex = i
+                    fs.SetValue("FIELDNAME", fields(i).FieldId)
                 Next
             End If
 
-            parameterLog.Add("FROM_TABLE", SAPFieldItem.escape(table))
-            func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
-
-            If Not String.IsNullOrEmpty(orders) Then
-                parameterLog.Add("ORDER_BY", SAPFieldItem.escape(orders))
-                func.SetValue(parameterLog.Last.Key, parameterLog.Last.Value)
+            'set options
+            If options IsNot Nothing Then
+                Dim opts As IRfcTable = func.GetTable("OPTIONS")
+                For i As Integer = 0 To options.Count - 1
+                    opts.Append()
+                    opts.CurrentIndex = i
+                    opts.SetValue("TEXT", If(i > 0, " AND ", "") + options(i).makeWhere)
+                Next
             End If
+
+            func.SetValue("QUERY_TABLE", SAPFieldItem.escape(table))
 
             func.Invoke(destination)
 
             Dim result As New List(Of Dictionary(Of String, String))
 
             Dim index As Integer = 0
-            Dim lines As New List(Of String)
-            Dim struct As IRfcTable = func.GetTable("LCSYSTAB")
-            For i As Long = 0 To struct.Count - 1
+            Dim struct As IRfcTable = func.GetTable("FIELDS")
+            Dim columns As New Dictionary(Of String, Integer)
+
+            For i As Integer = 0 To struct.Count - 1
                 struct.CurrentIndex = i
-                lines.Add(struct.GetString("ZEILE"))
-                If lines.Count = conditions.Count Then
-                    Dim row As New Dictionary(Of String, String)
-                    For lc As Integer = 0 To lines.Count - 1
-                        If Not row.ContainsKey(conditions(lc).FieldId) Then row.Add(conditions(lc).FieldId, lines(lc))
-                    Next
-                    result.Add(row)
-                    lines.Clear()
-                    index += 1
-                End If
+                columns.Add(struct.GetString("FIELDNAME"), struct.GetInt("LENGTH"))
             Next
 
-            If lines.Count > 0 Then ' add last line
+            Dim data As IRfcTable = func.GetTable("DATA")
+            For i As Long = 0 To data.Count - 1
+                data.CurrentIndex = i
+                Dim line = data.GetString("WA")
+
                 Dim row As New Dictionary(Of String, String)
-                For lc As Integer = 0 To lines.Count - 1
-                    If Not row.ContainsKey(conditions(lc).FieldId) Then row.Add(conditions(lc).FieldId, lines(lc))
+                Dim position As Integer = 0
+                For Each c In columns
+                    If position + c.Value <= line.Length Then
+                        row.Add(c.Key, line.Substring(position, c.Value).Trim)
+                    ElseIf position <= line.Length Then
+                        row.Add(c.Key, line.Substring(position).Trim)
+                    Else
+                        row.Add(c.Key, String.Empty)
+                    End If
+                    position += c.Value
                 Next
                 result.Add(row)
-            End If
+            Next
 
             Return result
 
         End Function
 
-        Public Function Invoke(ByVal destination As RfcDestination, Optional ByVal orders As String = "") As DataTable
-            Return Invoke(destination, Nothing, Nothing, orders)
+        Public Function Invoke(ByVal destination As RfcDestination) As DataTable
+            Return Invoke(destination, Nothing, Nothing)
         End Function
 
-        Public Function Invoke(ByVal destination As RfcDestination, ByVal fields As List(Of SAPFieldItem), Optional ByVal orders As String = "") As DataTable
-            Return Invoke(destination, Nothing, fields, orders)
+        Public Function Invoke(ByVal destination As RfcDestination, fields As String()) As DataTable
+            Return Invoke(destination, New List(Of String)(fields))
+        End Function
+
+        Public Function Invoke(ByVal destination As RfcDestination, fields As List(Of String)) As DataTable
+            Dim fieldItems As New List(Of SAPFieldItem)
+
+            For Each field As String In fields
+                fieldItems.Add(New SAPFieldItem(field))
+            Next
+
+            Return Invoke(destination, fieldItems, Nothing)
+
         End Function
 
     End Class
