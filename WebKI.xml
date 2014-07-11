@@ -48,9 +48,7 @@
   <HelpKINode Title="QueryVariant property" Url="html/38e09f71-ee1b-fa73-684e-4be9f3cc70f1.htm" />
   <HelpKINode Title="SAPConnector class">
     <HelpKINode Title="SAPConnector Class" Url="html/f6c90bbd-fba2-8d7c-4f2b-b2ca33199274.htm" />
-    <HelpKINode Title="SAPConnector Members" Url="html/9c79a57b-ec34-6581-52fc-7dc8d9363992.htm" />
     <HelpKINode Title="about SAPConnector class" Url="html/f6c90bbd-fba2-8d7c-4f2b-b2ca33199274.htm" />
-    <HelpKINode Title="all members" Url="html/9c79a57b-ec34-6581-52fc-7dc8d9363992.htm" />
     <HelpKINode Title="constructor" Url="html/910687da-9ad1-f668-312c-8929cfac5c44.htm" />
     <HelpKINode Title="methods" Url="html/ecb989f7-156d-e1b5-4839-44882a56dd26.htm" />
     <HelpKINode Title="properties" Url="html/cfca990c-b9bf-5f2b-cc8e-389febf73c46.htm" />
@@ -61,27 +59,13 @@
   <HelpKINode Title="SAPConnector.SAPConnector constructor" Url="html/910687da-9ad1-f668-312c-8929cfac5c44.htm" />
   <HelpKINode Title="SAPConnector.User property" Url="html/a7b04dc3-a267-53f7-99c2-3c8552d76884.htm" />
   <HelpKINode Title="SAPExtractorDotNET namespace" Url="html/0aab2d1d-1c40-ef8b-3c28-1b6f3bb861a1.htm" />
-  <HelpKINode Title="SAPExtractorDotNET.SAPConnector class">
-    <HelpKINode Title="SAPConnector Class" Url="html/f6c90bbd-fba2-8d7c-4f2b-b2ca33199274.htm" />
-    <HelpKINode Title="SAPConnector Members" Url="html/9c79a57b-ec34-6581-52fc-7dc8d9363992.htm" />
-  </HelpKINode>
-  <HelpKINode Title="SAPExtractorDotNET.SAPFieldItem class">
-    <HelpKINode Title="SAPFieldItem Class" Url="html/fed0224b-673f-8da9-edec-11fcce23a002.htm" />
-    <HelpKINode Title="SAPFieldItem Members" Url="html/ea165ccf-8838-0a1a-54be-0cc3c771f41d.htm" />
-  </HelpKINode>
-  <HelpKINode Title="SAPExtractorDotNET.SAPQueryExtractor class">
-    <HelpKINode Title="SAPQueryExtractor Class" Url="html/1adb5c51-ab38-7b1b-3360-318eefff9b6f.htm" />
-    <HelpKINode Title="SAPQueryExtractor Members" Url="html/a537c8bf-5d9b-fe42-d940-7735af1040e2.htm" />
-  </HelpKINode>
-  <HelpKINode Title="SAPExtractorDotNET.SAPTableExtractor class">
-    <HelpKINode Title="SAPTableExtractor Class" Url="html/9dd41df1-220d-c814-4ae0-e988f6c21703.htm" />
-    <HelpKINode Title="SAPTableExtractor Members" Url="html/3724d935-400c-a2cb-fd86-9639bb54664e.htm" />
-  </HelpKINode>
+  <HelpKINode Title="SAPExtractorDotNET.SAPConnector class" Url="html/f6c90bbd-fba2-8d7c-4f2b-b2ca33199274.htm" />
+  <HelpKINode Title="SAPExtractorDotNET.SAPFieldItem class" Url="html/fed0224b-673f-8da9-edec-11fcce23a002.htm" />
+  <HelpKINode Title="SAPExtractorDotNET.SAPQueryExtractor class" Url="html/1adb5c51-ab38-7b1b-3360-318eefff9b6f.htm" />
+  <HelpKINode Title="SAPExtractorDotNET.SAPTableExtractor class" Url="html/9dd41df1-220d-c814-4ae0-e988f6c21703.htm" />
   <HelpKINode Title="SAPFieldItem class">
     <HelpKINode Title="SAPFieldItem Class" Url="html/fed0224b-673f-8da9-edec-11fcce23a002.htm" />
-    <HelpKINode Title="SAPFieldItem Members" Url="html/ea165ccf-8838-0a1a-54be-0cc3c771f41d.htm" />
     <HelpKINode Title="about SAPFieldItem class" Url="html/fed0224b-673f-8da9-edec-11fcce23a002.htm" />
-    <HelpKINode Title="all members" Url="html/ea165ccf-8838-0a1a-54be-0cc3c771f41d.htm" />
     <HelpKINode Title="constructor" Url="html/c76a0876-1145-102b-a32d-9571c7709fc3.htm" />
     <HelpKINode Title="methods" Url="html/1a6f6560-c69d-ed61-4bc4-44a82d1a8887.htm" />
     <HelpKINode Title="properties" Url="html/25a029a9-6a67-6acc-e06b-f37c73338e08.htm" />
@@ -120,9 +104,7 @@
   <HelpKINode Title="SAPFieldItem.Value property" Url="html/07ce0bce-07cf-f5ab-a7a9-406503b7e85b.htm" />
   <HelpKINode Title="SAPQueryExtractor class">
     <HelpKINode Title="SAPQueryExtractor Class" Url="html/1adb5c51-ab38-7b1b-3360-318eefff9b6f.htm" />
-    <HelpKINode Title="SAPQueryExtractor Members" Url="html/a537c8bf-5d9b-fe42-d940-7735af1040e2.htm" />
     <HelpKINode Title="about SAPQueryExtractor class" Url="html/1adb5c51-ab38-7b1b-3360-318eefff9b6f.htm" />
-    <HelpKINode Title="all members" Url="html/a537c8bf-5d9b-fe42-d940-7735af1040e2.htm" />
     <HelpKINode Title="constructor" Url="html/bca8d2ba-de55-45d7-2fa9-8ac054352c81.htm" />
     <HelpKINode Title="methods" Url="html/7496f6c0-4a8a-5f6e-ce12-0a55d692ad00.htm" />
     <HelpKINode Title="properties" Url="html/d60befcb-c526-67f0-4b42-c4b421fcf9eb.htm" />
@@ -138,9 +120,7 @@
   <HelpKINode Title="SAPQueryExtractor.UserGroup property" Url="html/ed13fb55-bf6c-0bc4-87b9-d2d4b979207e.htm" />
   <HelpKINode Title="SAPTableExtractor class">
     <HelpKINode Title="SAPTableExtractor Class" Url="html/9dd41df1-220d-c814-4ae0-e988f6c21703.htm" />
-    <HelpKINode Title="SAPTableExtractor Members" Url="html/3724d935-400c-a2cb-fd86-9639bb54664e.htm" />
     <HelpKINode Title="about SAPTableExtractor class" Url="html/9dd41df1-220d-c814-4ae0-e988f6c21703.htm" />
-    <HelpKINode Title="all members" Url="html/3724d935-400c-a2cb-fd86-9639bb54664e.htm" />
     <HelpKINode Title="constructor" Url="html/bc9b5cc1-90c2-649f-a3f0-3351672b2445.htm" />
     <HelpKINode Title="methods" Url="html/cc6ed1bf-5057-83f6-ab18-516df53359d2.htm" />
     <HelpKINode Title="properties" Url="html/28a50d70-77bd-fb97-dad6-71930ce21be3.htm" />
