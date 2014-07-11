@@ -120,7 +120,11 @@ Namespace SAPExtractorDotNET
                 If String.IsNullOrEmpty(QueryVariant) Then
                     Dim param As SAPFieldItem = GetSelectFields(destination).Where(Function(p) Not p.isIgnore).FirstOrDefault
                     If param IsNot Nothing Then
-                        filters = New List(Of SAPFieldItem) From {param.Matches("*")}
+                        If param.FieldType = "D" Then
+                            filters = New List(Of SAPFieldItem) From {param.GreaterThan("10000101")}
+                        Else
+                            filters = New List(Of SAPFieldItem) From {param.Matches("*")}
+                        End If
                     End If
                 End If
             Else
@@ -166,7 +170,7 @@ Namespace SAPExtractorDotNET
                 struct.CurrentIndex = i
                 Dim column As New DataColumn(struct.GetString("FNAME"))
                 If result.Columns.Contains(column.ColumnName) Then
-                    column.ColumnName = column.ColumnName + "__" + struct.GetString("LID") ' for duplicate type
+                    column.ColumnName = column.ColumnName + "__" + struct.GetString("FPOS") ' for duplicate type
                 End If
 
                 column.Caption = struct.GetString("FDESC")

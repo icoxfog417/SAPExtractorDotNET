@@ -101,10 +101,8 @@ Public Class QueryExtraction
             Dim connection As RfcDestination = connector.Login
 
             Dim query As New SAPQueryExtractor(TestQuery, TestUserGroup)
-            'Dim param As SAPFieldItem = query.GetSelectFields(connection).Where(Function(p) Not p.isIgnore).FirstOrDefault
-            'param.Matches("C*")
 
-            Dim param As SAPFieldItem = SAPFieldItem.createByStatement("=C*", True)
+            Dim param As SAPFieldItem = SAPFieldItem.createByStatement(">=1000/1/1", True)
             Dim table As DataTable = query.Invoke(connection, New List(Of SAPFieldItem) From {param})
             ResultWriter.Write(table)
 
