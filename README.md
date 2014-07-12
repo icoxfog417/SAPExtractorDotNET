@@ -20,25 +20,14 @@ C#
 SAPConnector connector = new SAPConnector(TestDestination);
 
 try {
-	//Login to sap
 	RfcDestination connection = connector.Login;
 
-	SAPTableExtractor tableExtractor = new SAPTableExtractor("T001");
-
-	//Select columns
-	List<SAPFieldItem> fields = new List<SAPFieldItem>();
-	foreach (string column in {
+	SAPTableExtractor tableExtractor = new SAPTableExtractor(TestTable);
+	DataTable table = tableExtractor.Invoke(connection, {
 		"BUKRS",
 		"BUTXT"
-	}) {
-		fields.Add(new SAPFieldItem(column));
-	}
-
-	//Set parameters
-	options.Add(new SAPFieldItem("SPRAS").IsEqualTo(CultureInfo.CurrentCulture.TwoLetterISOLanguageName.Substring(0, 1).ToUpper));
-
-	//Execute
-	DataTable table = tableExtractor.Invoke(connection, fields, options);
+	}, new SAPFieldItem("SPRAS").IsEqualTo("EN"));
+	ResultWriter.Write(table);
 
 } catch (Exception ex) {
 	Console.WriteLine(ex.Message);
@@ -51,7 +40,6 @@ VB.Net
 Dim connector As New SAPConnector(TestDestination)
 
 Try
-    'Login to SAP
     Dim connection As RfcDestination = connector.Login
 
     Dim tableExtractor As New SAPTableExtractor(TestTable)
