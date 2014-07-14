@@ -20,5 +20,5 @@ LastBuild.log
 *.shfbproj_*
 Help/
 *.nupkg
-lib/*.dll
+SAPExtractorDotNET/lib/*.dll
 app.Debug.config

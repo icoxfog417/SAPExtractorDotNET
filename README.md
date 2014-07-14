@@ -7,6 +7,16 @@ You can extract data from Table or Query.
 [API Documentation](http://icoxfog417.github.io/SAPExtractorDotNET/Index.html)  
 [Install from Nuget](https://www.nuget.org/packages/SAPExtractorDotNET)  
 
+## Set up
+1. Clone this repository
+2. Download SAP .NET Connector from [SAP Service Marketplace](https://websmp110.sap-ag.de/connectors).  
+After download, move below dlls to `SAPExtractorDotNET/lib` folder.
+
+ * libicudecnumber.dll
+ * rscp4n.dll
+ * sapnco.dll
+ * sapnco_utils.dll
+
 ## How to use
 Below is code sample (see test project code).  
 (repository is builded by x86, if your system is x64 then build it by SAPExtractorDotNET/SAPNco(x64))  
