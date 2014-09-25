@@ -113,4 +113,42 @@ Public Class QueryExtraction
 
     End Sub
 
+    <TestMethod()>
+    Public Sub LineDataSeparation()
+        Dim queryData As New List(Of String)
+        queryData.Add("000000000000000001")
+        queryData.Add("20010101")
+        queryData.Add("TST,00000")
+        queryData.Add("")
+
+        queryData.Add("A00000000000000001")
+        queryData.Add("20020101")
+        queryData.Add("TST;00000")
+        queryData.Add("XX")
+
+        queryData.Add("B00000000000000001")
+        queryData.Add("20030101")
+        queryData.Add("123:000000")
+        queryData.Add("X")
+
+        Dim queryLine As String = ""
+        For Each el In queryData
+            If Not String.IsNullOrEmpty(queryLine) Then
+                queryLine += ","
+            End If
+            queryLine += el.Length.ToString.PadLeft(3, "0") + ":" + el
+        Next
+        queryLine += ";"
+        Console.WriteLine(queryLine)
+
+        Dim line As New LineData(0, queryLine)
+        line.Split()
+
+        For i As Integer = 0 To line.Elements.Count - 1
+            Console.WriteLine(line.Elements(i))
+            Assert.AreEqual(queryData(i), line.Elements(i))
+        Next
+
+    End Sub
+
 End Class

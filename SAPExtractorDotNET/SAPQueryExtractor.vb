@@ -3,6 +3,7 @@
 Imports SAP.Middleware.Connector
 Imports System.Threading.Tasks
 Imports System.Data
+Imports System.Text.RegularExpressions
 
 Namespace SAPExtractorDotNET
 
@@ -174,7 +175,7 @@ Namespace SAPExtractorDotNET
                 End If
 
                 column.Caption = struct.GetString("FDESC")
-
+                column.MaxLength = struct.GetInt("FOLEN")
                 result.Columns.Add(column)
 
             Next
@@ -227,61 +228,45 @@ Namespace SAPExtractorDotNET
 
         End Function
 
-        ''' <summary>
-        ''' to read rfc returned string
-        ''' </summary>
-        ''' <remarks></remarks>
-        Private Class LineData
-            Public Property Index As Long = 0
-            Public Property Line As String = ""
-            Public Property Elements As New List(Of String)
+    End Class
 
-            Public Const LineSeparator As String = ";"
-            Public Const ItemSeparator As String = ","
-            Public Const FieldSeparator As String = ":"
+    ''' <summary>
+    ''' to read rfc returned string
+    ''' </summary>
+    ''' <remarks></remarks>
+    Public Class LineData
+        Public Property Index As Long = 0
+        Public Property Line As String = ""
+        Public Property Elements As New List(Of String)
 
-            Public Sub New(ByVal index As Long, ByVal line As String)
-                Me.Index = index
-                Me.Line = line
-            End Sub
+        Public Const ElementPattern As String = "(?<length>\d\d\d):(?<content>.*?)(?<separator>(,|;))" 'data ends with , or ;(next field or line end)
 
-            Public Sub Split()
-                Dim separated As String() = Line.Split((LineSeparator + ItemSeparator).ToCharArray)
-                Dim els As New List(Of String)
+        Public Sub New(ByVal index As Long, ByVal line As String)
+            Me.Index = index
+            Me.Line = line
+        End Sub
 
-                For i As Integer = 0 To UBound(separated)
-                    Dim str As String = separated(i)
-                    If String.IsNullOrEmpty(str) Then Continue For
-                    If isElement(str) Then
-                        els.Add(str)
-                    ElseIf isElement(els.Last + str) Then 'for data include separator
-                        Dim concated As String = els.Last + ItemSeparator + str
-                        els.RemoveAt(els.Count - 1)
-                        els.Add(concated)
-                    End If
+        Public Sub Split()
+            Dim regex As New Regex(ElementPattern)
+            Dim mc As MatchCollection = regex.Matches(Line)
 
-                Next
-
-                For Each e As String In els
-                    Dim es As String() = e.Split(FieldSeparator.ToCharArray, 2)
-                    Elements.Add(es(1))
-                Next
-
-            End Sub
-
-            Private Function isElement(ByVal str As String) As Boolean
-                Dim itemLength As Integer = 0
-                'each element is like 001:xxxxx
-                If str.IndexOf(FieldSeparator) = 3 AndAlso Integer.TryParse(str.Substring(0, 3), itemLength) Then
-                    Return True
-                Else
-                    Return False
+            Dim index As Integer = 0
+            For Each m As Match In mc
+                If index < m.Index Then 'for data includes the separator
+                    Elements(Elements.Count - 1) += Line.Substring(index - 1, m.Index - index)
+                    index = m.Index
                 End If
-            End Function
+                Elements.Add(m.Groups("content").Value)
+                index += m.Length
+            Next
 
-        End Class
+        End Sub
 
+        Public Overrides Function ToString() As String
+            Return Me.Line
+        End Function
 
     End Class
+
 
 End Namespace
