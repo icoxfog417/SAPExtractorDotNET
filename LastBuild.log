@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder" version="2014.5.31.0" projectFile="C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\SAPExtractorDotNETAPI.shfbproj" started="2014/07/11 17:42:27">
+<shfbBuild product="Sandcastle Help File Builder" version="2014.5.31.0" projectFile="C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\SAPExtractorDotNETAPI.shfbproj" started="2014/09/25 17:22:38">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -20,16 +20,16 @@ Copying XML comments files
 </buildStep>
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, 英語 (米国))...
-    Last step completed in 00:00:00.0350
+    Last step completed in 00:00:00.1400
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.0110
+    Last step completed in 00:00:00.0050
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe]
-2014/07/11 17:42:29 にビルドを開始しました。
+2014/09/25 17:22:40 にビルドを開始しました。
 ノード 1 上のプロジェクト &quot;C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\GenerateRefInfo.proj&quot; (既定のターゲット)。
 PrepareForBuild:
   ディレクトリ &quot;obj\Debug\&quot; を作成しています。
@@ -38,7 +38,7 @@ GenerateRefInfo:
   Copyright c 2006-2014, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2014, Eric Woodruff, All Rights Reserved.
   Loaded 1 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 1 namespaces, 4 types, and 58 members
+  Wrote information on 1 namespaces, 5 types, and 65 members
   &quot;reflection.org&quot; から &quot;reflection.all&quot; へファイルをコピーしています。
   XslTransform (v2014.5.31.0)
   Copyright c 2006-2014, Microsoft Corporation, All Rights Reserved.
@@ -48,19 +48,19 @@ GenerateRefInfo:
 
 ビルドに成功しました。
 
-経過時間 00:00:01.67
-    Last step completed in 00:00:02.5133
+経過時間 00:00:01.72
+    Last step completed in 00:00:02.2982
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe]
-2014/07/11 17:42:31 にビルドを開始しました。
+2014/09/25 17:22:41 にビルドを開始しました。
 ノード 1 上のプロジェクト &quot;C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\TransformManifest.proj&quot; (既定のターゲット)。
 TransformManifest:
   XslTransform (v2014.5.31.0)
   Copyright c 2006-2014, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2014, Eric Woodruff, All Rights Reserved.
-  Applying XSL transformation &#39;C:\Program Files\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
+  Applying XSL transformation &#39;C:\Program Files\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\ApplyVSDocModel.xsl&#39;.
   &quot;reflection.xml&quot; から &quot;reflection.nofilenames&quot; へファイルをコピーしています。
   XslTransform (v2014.5.31.0)
   Copyright c 2006-2014, Microsoft Corporation, All Rights Reserved.
@@ -74,54 +74,54 @@ TransformManifest:
 
 ビルドに成功しました。
 
-経過時間 00:00:01.59
-    Last step completed in 00:00:02.1002
+経過時間 00:00:01.36
+    Last step completed in 00:00:01.4741
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.0770
+    Last step completed in 00:00:00.0720
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0050
+    Last step completed in 00:00:00.0060
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0030
+    Last step completed in 00:00:00.0020
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe]
-2014/07/11 17:42:33 にビルドを開始しました。
+2014/09/25 17:22:43 にビルドを開始しました。
 ノード 1 上のプロジェクト &quot;C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\GenerateIntermediateTOC.proj&quot; (既定のターゲット)。
 GenerateIntermediateTOC:
   XslTransform (v2014.5.31.0)
   Copyright c 2006-2014, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2014, Eric Woodruff, All Rights Reserved.
-  Applying XSL transformation &#39;C:\Program Files\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\CreateVSToc.xsl&#39;.
+  Applying XSL transformation &#39;C:\Program Files\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
 プロジェクト &quot;C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\GenerateIntermediateTOC.proj&quot; (既定のターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:00.09
+経過時間 00:00:00.11
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.6281
+    Last step completed in 00:00:00.3570
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00.0450
+    Last step completed in 00:00:00.0470
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\sandcastle.config
-    Last step completed in 00:00:00.0240
+    Last step completed in 00:00:00.0210
 </buildStep>
 <buildStep step="BuildReferenceTopics">
 Building reference help topics...
 [C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe]
-2014/07/11 17:42:34 にビルドを開始しました。
+2014/09/25 17:22:43 にビルドを開始しました。
 ノード 1 上のプロジェクト &quot;C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj&quot; (既定のターゲット)。
 BuildReferenceTopics:
   BuildAssembler (v2014.5.31.0)
@@ -130,11 +130,20 @@ BuildReferenceTopics:
   Loading configuration...
   ResolveReferenceLinksComponent: The MSDN content ID cache &#39;C:\Users\tie301837\AppData\Local\EWSoftware\Sandcastle Help File Builder\Cache\MsdnContentId.cache&#39; does not exist yet.  All IDs will be looked up in this build which will slow it down.
   Processing topics...
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:SAPExtractorDotNET.SAPConnector] MSDN web service failed.  No further look ups will be performed for this build. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:SAPExtractorDotNET.LineData] MSDN web service failed.  No further look ups will be performed for this build. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : Reason: HTTP ステータス 417: Expectation Failed で要求が失敗しました。 [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:SAPExtractorDotNET.SAPConnector] MSDN URL not found for target &#39;T:System.Object&#39;. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
-BuildAssembler : warning : ResolveReferenceLinksComponent: [T:SAPExtractorDotNET.SAPConnector] MSDN web service failed.  No further look ups will be performed for this build. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:SAPExtractorDotNET.LineData] MSDN URL not found for target &#39;T:System.Object&#39;. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ResolveReferenceLinksComponent: [T:SAPExtractorDotNET.LineData] MSDN web service failed.  No further look ups will be performed for this build. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : Reason: HTTP ステータス 417: Expectation Failed で要求が失敗しました。 [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.LineData.#ctor(System.Int64,System.String)] Missing &lt;param name=&quot;index&quot;/&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.LineData.#ctor(System.Int64,System.String)] Missing &lt;param name=&quot;line&quot;/&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [F:SAPExtractorDotNET.LineData.ElementPattern] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:SAPExtractorDotNET.LineData.Elements] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:SAPExtractorDotNET.LineData.Index] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [P:SAPExtractorDotNET.LineData.Line] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.LineData.Split] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.LineData.ToString] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
+BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.LineData.ToString] Missing &lt;returns&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.SAPConnector.#ctor(System.String)] Missing &lt;param name=&quot;destination&quot;/&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.SAPConnector.#ctor(System.String,System.String,System.String)] Missing &lt;param name=&quot;destination&quot;/&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [M:SAPExtractorDotNET.SAPConnector.#ctor(System.String,System.String,System.String)] Missing &lt;param name=&quot;user&quot;/&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
@@ -267,22 +276,22 @@ BuildAssembler : warning : ResolveReferenceLinksComponent: [M:SAPExtractorDotNET
 BuildAssembler : warning : ResolveReferenceLinksComponent: [M:SAPExtractorDotNET.SAPTableExtractor.Invoke(SAP.Middleware.Connector.RfcDestination,System.String[],SAPExtractorDotNET.SAPFieldItem[])] Unknown reference link target &#39;T:SAP.Middleware.Connector.RfcDestination&#39;. [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [P:SAPExtractorDotNET.SAPTableExtractor.Table] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
 BuildAssembler : warning : ShowMissingComponent: [P:SAPExtractorDotNET.SAPTableExtractor.TableText] Missing &lt;summary&gt; documentation [C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj]
-  Processed 75 topic(s)
-  135 warning(s)
+  Processed 86 topic(s)
+  144 warning(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 4 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 1 of 30.
 プロジェクト &quot;C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\BuildReferenceTopics.proj&quot; (既定のターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:08.56
-    Last step completed in 00:00:08.6549
+経過時間 00:00:10.87
+    Last step completed in 00:00:10.9741
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
 
 Clearing any prior web output
-    Last step completed in 00:00:00.0030
+    Last step completed in 00:00:00.1560
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -294,17 +303,17 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
 
 Processing Help 1 files in C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1
-Processed 75 HTML files
+Processed 86 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\SAPExtractorDotNETAPI.hhk
 Saving HTML Help 1 table of contents to C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\SAPExtractorDotNETAPI.hhc
 
 Processing website files in C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\Website
-Processed 75 HTML files
+Processed 86 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\WebKI.xml
 Saving website table of contents to C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\WebTOC.xml
-    Last step completed in 00:00:01.4951
+    Last step completed in 00:00:01.7582
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -457,7 +466,7 @@ C:\Program Files\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS20
 C:\Program Files\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2010\..\LegacyWeb\TOC.css -&gt; C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\Website\TOC.css
 C:\Program Files\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2010\..\LegacyWeb\TOC.js -&gt; C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\Website\TOC.js
 C:\Program Files\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2010\..\LegacyWeb\Web.Config -&gt; C:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\Website\Web.Config
-    Last step completed in 00:00:00.7041
+    Last step completed in 00:00:01.9592
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
@@ -469,7 +478,7 @@ Generating HTML Help 1 index file...
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0100
+    Last step completed in 00:00:00.0270
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -486,9 +495,9 @@ Compiling HTML Help 1 file...
   
   Compile time: 0 minutes, 2 seconds
   
-  77	Topics
+  88	Topics
   
-  784	Local links
+  893	Local links
   
   0	Internet links
   
@@ -498,11 +507,11 @@ Compiling HTML Help 1 file...
   
   
   
-  Created c:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1\SAPExtractorDotNETAPI.chm, 121,048 bytes
+  Created c:\Users\tie301837\Documents\works\SAPExtractorDotNET\documents\Help\Working\Output\HtmlHelp1\SAPExtractorDotNETAPI.chm, 127,802 bytes
   
-  Compression decreased file by 567,641 bytes.
+  Compression decreased file by 639,308 bytes.
   
-    Last step completed in 00:00:04.3624
+    Last step completed in 00:00:03.9314
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
@@ -511,22 +520,22 @@ Generating website table of contents file...
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
-    Last step completed in 00:00:00.5751
+    Last step completed in 00:00:00.5721
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
 
 Copied 100 files
-Copied 184 files for the website content
-    Last step completed in 00:00:01.1421
+Copied 195 files for the website content
+    Last step completed in 00:00:01.1951
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00.0860
+    Last step completed in 00:00:00.5701
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 07/11/2014 05:42 午後.  Total time: 00:00:23.8464
+Build completed successfully at 09/25/2014 05:23 午後.  Total time: 00:00:26.9197
 
 </buildStep>
 </shfbBuild>
