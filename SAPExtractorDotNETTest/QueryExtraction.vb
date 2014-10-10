@@ -118,17 +118,17 @@ Public Class QueryExtraction
         Dim queryData As New List(Of String)
         queryData.Add("000000000000000001")
         queryData.Add("20010101")
-        queryData.Add("TST,00000")
+        queryData.Add("")
         queryData.Add("")
 
         queryData.Add("A00000000000000001")
-        queryData.Add("20020101")
-        queryData.Add("TST;00000")
+        queryData.Add("2002/01/01:")
+        queryData.Add("5:00000,")
         queryData.Add("XX")
 
         queryData.Add("B00000000000000001")
         queryData.Add("20030101")
-        queryData.Add("123:000000")
+        queryData.Add("025:aaa, 000: aaaa, 022: bbbb;") 'most complicated case
         queryData.Add("X")
 
         Dim queryLine As String = ""
@@ -138,7 +138,7 @@ Public Class QueryExtraction
             End If
             queryLine += el.Length.ToString.PadLeft(3, "0") + ":" + el
         Next
-        queryLine += ";"
+        queryLine += ";/"
         Console.WriteLine(queryLine)
 
         Dim line As New LineData(0, queryLine)

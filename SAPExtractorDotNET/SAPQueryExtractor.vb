@@ -239,7 +239,7 @@ Namespace SAPExtractorDotNET
         Public Property Line As String = ""
         Public Property Elements As New List(Of String)
 
-        Public Const ElementPattern As String = "(?<length>\d\d\d):(?<content>.*?)(?<separator>(,|;))" 'data ends with , or ;(next field or line end)
+        Public Const LENGTH_PART_SIZE As Integer = 3
 
         Public Sub New(ByVal index As Long, ByVal line As String)
             Me.Index = index
@@ -247,20 +247,38 @@ Namespace SAPExtractorDotNET
         End Sub
 
         Public Sub Split()
-            Dim regex As New Regex(ElementPattern)
-            Dim mc As MatchCollection = regex.Matches(Line)
-
             Dim index As Integer = 0
-            For Each m As Match In mc
-                If index < m.Index Then 'for data includes the separator
-                    Elements(Elements.Count - 1) += Line.Substring(index - 1, m.Index - index)
-                    index = m.Index
-                End If
-                Elements.Add(m.Groups("content").Value)
-                index += m.Length
-            Next
+
+            'length between index and line-end has to be shorter than length-part size(if not, there is no content to be read).
+            While index < Me.Line.Length - LENGTH_PART_SIZE
+                Dim nextAndContent As KeyValuePair(Of Integer, String) = readLine(index, Me.Line)
+                index = nextAndContent.Key
+                Elements.Add(nextAndContent.Value)
+            End While
 
         End Sub
+
+        Private Function readLine(ByVal index As Integer, ByVal line As String) As KeyValuePair(Of Integer, String)
+            Dim head As Integer = index
+
+            Dim lengthPart As String = line.Substring(head, LENGTH_PART_SIZE)
+            Dim length As Integer = -1
+            Dim content As String = ""
+
+            If Integer.TryParse(lengthPart, length) Then
+                head += LENGTH_PART_SIZE + 1
+                If head + length <= line.Length Then
+                    content = line.Substring(head, length)
+                Else
+                    Throw New Exception("query data is too short than directed content length. @line " + Me.Index.ToString)
+                End If
+            Else
+                Throw New Exception("Unexpected query data. it doesn't have content length part. @line " + Me.Index.ToString)
+            End If
+
+            Return New KeyValuePair(Of Integer, String)(head + length + 1, content) ' Next head position and content
+
+        End Function
 
         Public Overrides Function ToString() As String
             Return Me.Line
